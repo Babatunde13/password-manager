@@ -50,72 +50,68 @@ export const loginUser = async (email, password) => {
   else return
 }
 
-export const createPassword = async (avatar, firstName, lastName, email, phone, tags, userId, jobTitle, company) => {
+export const createPassword = async (accountName, accountUrl, email, password) => {
   let user = await getUser(userId)
   const date = new Date()
   const months = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ]
-  let newContact = await client.query(
+  let newPassword = await client.query(
     q.Create(
-      q.Collection('contacts'),
+      q.Collection('Passwords'),
       {
         data: {
-          firstName,
-          lastName,
+          accountName,
+          accountUrl,
           email,
-          phone,
-          company,
-          jobTitle,
-          avatar,
+          password,
           created__at: `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`,
           user: {
             name:user.name, 
             email: user.email, 
             id:user.id
-          },
-          tags
+          }
         }
       }
     )
   )
-  if (newContact.name === 'BadRequest') return
-  newContact.data.id = newContact.ref.value.id
-  return newContact.data
+  if (newPassword.name === 'BadRequest') return
+  newPassword.data.id = newPassword.ref.value.id
+  return newPassword.data
 }
 
-export const getContactsByUserID = async id => {
-  let userContacts = await client.query(
+export const getPasswordsByUserID = async id => {
+  let userPasswords = await client.query(
     q.Get(
-      q.Match(q.Index('user_contacts'), id)
+      q.Match(q.Index('user_passwords'), id)
     )
   )
-  if (userContacts.name === "NotFound") return
-  if (userContacts.name === "BadRequest") return "Something went wrong"
-  userContacts.data.id = userContacts.ref.value.id
-  return userContacts.data
+  if (userPasswords.name === "NotFound") return
+  if (userPasswords.name === "BadRequest") return "Something went wrong"
+  userPasswords.data.id = userPasswords.ref.value.id
+  return userPasswords.data
 }
 
-export const getContact = async id => {
-  let contact = await client.query(
-    q.Get(q.Ref(q.Collection('contacts'), id))
+export const getPassword = async id => {
+  let password = await client.query(
+    q.Get(q.Ref(q.Collection('Passwords'), id))
   )
-  if (contact.name === "NotFound") return
-  if (contact.name === "BadRequest") return "Something went wrong"
-  contact.data.id = contact.ref.value.id
-  return contact.data
+  if (password.name === "NotFound") return
+  if (password.name === "BadRequest") return "Something went wrong"
+  password.data.id = password.ref.value.id
+  return password.data
 }
 
-export const updateContact = async (payload, id) => {
-  let contact = await client.query(
+export const updatePassword = async (payload, id) => {
+  let password = await client.query(
     q.Update(
-      q.Ref(q.Collection('contacts'), id),
+      q.Ref(q.Collection('Passwords'), id),
       {data: {payload}}
     )
   )
-  if (contact.name === "NotFound") return
-  if (contact.name === "BadRequest") return "Something went wrong"
-  contact.data.id = contact.ref.value.id
-  return contact.data
+  if (password.name === "NotFound") return
+  if (password.name === "BadRequest") return "Something went wrong"
+  Password.data.id = password.ref.value.id
+  return password.data
 }
