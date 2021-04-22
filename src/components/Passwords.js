@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button'
-import Table from 'react-bootstrap/Table'
+import Card from 'react-bootstrap/Card'
+import ListGroup from "react-bootstrap/ListGroup";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
-import EditPasswordModal from './editPassword.modal'
 import PreviewPasswordModal from './previewPassword.modal'
 
 const Password = ({
@@ -13,12 +13,10 @@ const Password = ({
   password,
   handleDelete
 }) => {
+  // eslint-disable-next-line
   const [editModal, setEditModal] = useState(false)
   const [previewModal, setpreviewModal] = useState(false)
   const title_ = accountName || accountUrl
-  const editPassword = () => {
-    setEditModal(true)
-  }
 
   const previewPassword = () => {
     setpreviewModal(true)
@@ -31,35 +29,17 @@ const Password = ({
   }
 
   return (
-      <tr>
-        <td>{accountName} {accountUrl}</td>
-        <td>{email}</td>
-        <td>{password}</td>
-        <td><Button onClick={previewPassword}>Preview</Button></td>
-        <td><Button onClick={editPassword}>Edit</Button></td>
-        <td><Button onClick={deletePassword}>Delete</Button></td>
-        
-        <EditPasswordModal
-          show={editModal}
-          accountName={accountName}
-          accountUrl={accountUrl}
-          email={email}
-          password={password}
-          title={"Edit Password for "+title_}
-          onHide={() => {
-            let n = window.confirm("Your changes won't be saved...")
-            if (n) setEditModal(false)
-          }}
-          onEdit ={(Password) => {
-            // save Password to dB
-            // setPasswords([Password, ...Passwords])
-            alert(`Password for ${accountName || accountUrl} updated successfully`)
-            setEditModal(false)
-          }}
-        />
+      <ListGroup style={{padding: '1em'}}>
+        <Button style={{backgroundColor: "white", color: 'black'}} onClick={previewPassword}>
+          <img src="./src/assets/url.png" alt="" />
+          <span>{accountName}</span>
+        </Button>
         <PreviewPasswordModal
           show={previewModal}
+          edit={editModal}
+          onHideEdit={()=>{setEditModal(false)}}
           onEdit={()=>{setEditModal(true)}}
+          onDelete={deletePassword}
           accountName={accountName}
           accountUrl={accountUrl}
           email={email}
@@ -67,34 +47,23 @@ const Password = ({
           title={"Preview Password for "+title_}
           onHide={() => {setpreviewModal(false)}}
         />
-      </tr>
+      </ListGroup>
   )
 }
 
+
 const Passwords = ({passwords, handleEdit, handleDelete}) => {
   return (
-    <>
-      {!passwords && 'Fetching Passwords...'}
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Job Title, Company</th>
-            <th>Preview</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Card border="dark" style={{margin: ' 5em 10em', padding: '20px', border: '1px solid black'}}> 
+        <Card.Header>
+          {passwords.length} Sites and Apps
+        </Card.Header>
+        {!passwords && 'Fetching Passwords...'}
         {passwords.map(ele => <Password {...ele} 
-          key={ele.id} 
-          handleEdit={handleEdit} 
-          handleDelete={handleDelete} />)} 
-        </tbody>
-      </Table>
-    </>
+            key={ele.id} 
+            handleEdit={handleEdit} 
+            handleDelete={handleDelete} />)} 
+      </Card>
   )
 }
 

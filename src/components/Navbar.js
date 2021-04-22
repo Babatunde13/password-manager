@@ -4,7 +4,6 @@ import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
-import {Link} from 'react-router-dom'
 import CreatePasswordModal from '../components/createPassword.modal'
 
 const NavbarComponent = (props) => {
@@ -18,7 +17,7 @@ const NavbarComponent = (props) => {
     <>
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Navbar.Brand>
-          <Link to="/" style={{listStyle: 'none', color: 'white'}}>Home</Link>
+        <Button onClick={() => {window.location.assign("/")}} style={{listStyle: 'none', color: 'white'}}>Home</Button>
         </Navbar.Brand>
         <Nav className="mr-auto">
           <Form inline>
@@ -26,7 +25,7 @@ const NavbarComponent = (props) => {
             <Button variant="outline-light">Search</Button>
           </Form> 
           <Navbar.Brand>
-            <Link to="/dashboard" style={{listStyleType: 'none', color: 'white'}}>Dashboard</Link>
+          <Button onClick={() => {window.location.assign("/dashboard")}} style={{listStyleType: 'none', color: 'white'}}>Dashboard</Button>
           </Navbar.Brand>
           {props.onCreate &&
           <>

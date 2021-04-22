@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Card from "react-bootstrap/Card";
 // import {  createContact} from "./models";
 import data from '../data'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,6 +24,11 @@ const AppDashboard = () => {
           alert('New contact created successfully')
         }
       }/>
+
+      <Card>
+
+      </Card>
+
       <Passwords 
         passwords={passwords}
         handleEdit={(id) => {
