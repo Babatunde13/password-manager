@@ -1,9 +1,13 @@
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import ListGroup from "react-bootstrap/ListGroup";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import FormControl from "react-bootstrap/FormControl";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import PreviewPasswordModal from './previewPassword.modal'
+import url from '../assets/url.png';
 
 const Password = ({
   id,
@@ -31,9 +35,10 @@ const Password = ({
   return (
       <ListGroup style={{padding: '1em'}}>
         <Button style={{backgroundColor: "white", color: 'black'}} onClick={previewPassword}>
-          <img src="./src/assets/url.png" alt="" />
+          <img src={url} alt="" />
           <span>{accountName}</span>
         </Button>
+        <hr/>
         <PreviewPasswordModal
           show={previewModal}
           edit={editModal}
@@ -56,13 +61,21 @@ const Passwords = ({passwords, handleEdit, handleDelete}) => {
   return (
       <Card border="dark" style={{margin: ' 5em 10em', padding: '20px', border: '1px solid black'}}> 
         <Card.Header>
+         <Row style={{display: 'flex', justifyContent: 'space-between'}}>
           {passwords.length} Sites and Apps
-        </Card.Header>
+            <Form inline>
+              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2" />
+            </Form>
+          </Row> 
+        </Card.Header> <br/><br/>
         {!passwords && 'Fetching Passwords...'}
-        {passwords.map(ele => <Password {...ele} 
+        {passwords.map(ele => 
+          <Password 
+            {...ele} 
             key={ele.id} 
             handleEdit={handleEdit} 
-            handleDelete={handleDelete} />)} 
+            handleDelete={handleDelete} />
+        )} 
       </Card>
   )
 }

@@ -28,7 +28,8 @@ const PreviewPasswordModal = props  => {
               <div><Link to={props.accountUrl} target="_blank"><small>{props.accountName}</small></Link></div>
             </Col>
             <Col>
-              <div><Form.Control type="text" value={props.email} disabled/></div>
+              <div><Form.Control type="text" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.email} disabled/></div>
+              <div><Form.Control type="password" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.password} disabled/></div>
               <div>{password} <Button onClick={() => {setPassword(password === props.password? "*".repeat(props.password.length) : props.password)}}>{password === props.password? "Hide": "Preview"}</Button></div>
             </Col>
           </Row>
