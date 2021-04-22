@@ -7,7 +7,7 @@ import FormControl from "react-bootstrap/FormControl";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import PreviewPasswordModal from './previewPassword.modal'
-import url from '../assets/url.png';
+import web from '../assets/web.png';
 
 const Password = ({
   id,
@@ -39,10 +39,12 @@ const Password = ({
   }
 
   return (
-      <ListGroup style={{padding: '1em'}}>
-        <Button style={{backgroundColor: "white", color: 'black'}} onClick={previewPassword}>
-          <img src={url} alt="" />
-          <span>{accountName}</span>
+      <ListGroup>
+        <Button style={{backgroundColor: "white", color: 'black', border: '0px solid gray'}} onClick={previewPassword}>
+          <span>
+            <img style={{paddingLeft: '1', marginLeft: '1', border: '1px solid dashed'}} src={web} alt="" />
+            <span>{accountName}</span>
+          </span>
         </Button>
         <hr/>
         <PreviewPasswordModal
@@ -72,18 +74,20 @@ const Passwords = ({passwords, handleEdit, handleDelete}) => {
          <Row style={{display: 'flex', justifyContent: 'space-between'}}>
           {passwords.length} Sites and Apps
             <Form inline>
-              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2" />
+              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onK/>
             </Form>
           </Row> 
         </Card.Header> <br/><br/>
-        {!passwords && 'Fetching Passwords...'}
-        {passwords.map(ele => 
-          <Password 
-            {...ele} 
-            key={ele.id} 
-            handleEdit={handleEdit} 
-            handleDelete={handleDelete} />
-        )} 
+        <Card.Body>
+          {!passwords && 'Fetching Passwords...'}
+          {passwords.map(ele => 
+            <Password 
+              {...ele} 
+              key={ele.id} 
+              handleEdit={handleEdit} 
+              handleDelete={handleDelete} />
+          )} 
+        </Card.Body>
       </Card>
   )
 }

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal'
 import FormControl from 'react-bootstrap/FormControl'
 import Container from "react-bootstrap/Container";
@@ -7,7 +6,8 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import EditPasswordModal from "./editPassword.modal";
-import url from '../assets/url.png';
+import web from '../assets/web.png';
+// import eye from '../assets/eye.png';
 
 const PreviewPasswordModal = props  => {
     const [passwordType, setPasswordType] = useState('password')
@@ -20,20 +20,28 @@ const PreviewPasswordModal = props  => {
       <Modal.Header closeButton>
       <Button variant="danger" onClick={props.onHide}>Close</Button>
         <Modal.Title id="contained-modal-title-vcenter">
-          <img src={url} alt=""/> {props.accountName}
+          <img src={web} alt=""/> {props.accountName}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
         <Container>
           <Row>
             <Col>
-              <div><Link to={props.accountUrl} target="_blank"><small>{props.accountName}</small></Link></div>
+              <div><a href={props.accountUrl} rel="noreferrer" target="_blank"><small>{props.accountName}</small></a></div>
             </Col>
             <Col>
-              <div><FormControl type="text" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.email} disabled/></div>
+              <div><FormControl type="text" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.email} readOnly/></div>
               <div>
-                <FormControl type={passwordType} style={{width: '18em', padding: '20px', margin: '5px'}} value={props.password} disabled/>
-                <Button onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>{passwordType === "password"? "Preview": "Hide"}</Button>
+                <FormControl type={passwordType} style={{width: '18em', padding: '20px', margin: '5px'}} value={props.password} readOnly/>
+                <Button onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>{passwordType === "password"? "Preview Password": "Hide"}</Button>
+                <Button onClick={() => {
+                  var passwordText = document.createElement('textarea')
+                  passwordText.innerText = props.password
+                  document.body.appendChild(passwordText)
+                  passwordText.select()
+                  document.execCommand('copy')
+                  passwordText.remove()
+                }}>Copy</Button>
               </div>
             </Col>
           </Row>
