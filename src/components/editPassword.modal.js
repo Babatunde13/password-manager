@@ -22,6 +22,7 @@ const EditPasswordModal = props  => {
       accountName,
       accountUrl,
       email,
+      password,
       id: props.id
     }
     console.log(payload)
@@ -60,7 +61,7 @@ const EditPasswordModal = props  => {
             </Row>
             <Row>
               <Form.Group as={Col}>
-                <Form.Control type="password" value={password} placeholder="******" onChange={(e) => setPassword(e.target.value)}/>
+                <Form.Control type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
               </Form.Group>
             </Row>
           </Form>

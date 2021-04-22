@@ -45,6 +45,7 @@ const PreviewPasswordModal = props  => {
         <Button variant="danger" onClick={props.onDelete}>Delete</Button>
       </Modal.Footer>
       <EditPasswordModal
+          id={props.id}
           show={props.edit}
           editPassword={props.editPassword}
           onEdit={props.onEdit}

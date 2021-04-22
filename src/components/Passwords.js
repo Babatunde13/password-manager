@@ -29,12 +29,11 @@ const Password = ({
 
   const editPassword = (payload) => {
     handleEdit(payload)
-    setEditModal(true)
+    setEditModal(false)
   }
 
 
   const deletePassword = () => {
-    console.log(id)
     handleDelete(id)
     alert('Password deleted successfully')
   }
@@ -47,6 +46,7 @@ const Password = ({
         </Button>
         <hr/>
         <PreviewPasswordModal
+          id={id}
           show={previewModal}
           edit={editModal}
           onHideEdit={()=>{setEditModal(false)}}
@@ -56,7 +56,7 @@ const Password = ({
           accountUrl={accountUrl}
           email={email}
           password={password}
-          editPassword={handleEdit}
+          editPassword={editPassword}
           title={"Preview Password for "+title_}
           onHide={() => {setpreviewModal(false)}}
         />

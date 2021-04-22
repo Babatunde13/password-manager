@@ -33,7 +33,9 @@ const AppDashboard = () => {
         passwords={passwords}
         handleEdit={(payload) => {
           // create an edit Modal
-            setPasswords(passwords.map(password => password.id === payload.id? password : payload))
+          console.log(payload)
+            setPasswords(passwords.map( password => password.id === payload.id? payload : password))
+            console.log(passwords.map( password => password.id === payload.id? payload : password))
         }}
         handleDelete={(id) => {
           setPasswords(passwords.filter( ele =>  ele.id !== id)) 
