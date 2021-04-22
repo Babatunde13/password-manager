@@ -10,11 +10,12 @@ const Password = ({
   accountName,
   accountUrl,
   email,
-  password
+  password,
+  handleDelete
 }) => {
   const [editModal, setEditModal] = useState(false)
   const [previewModal, setpreviewModal] = useState(false)
-
+  const title_ = accountName || accountUrl
   const editPassword = () => {
     setEditModal(true)
   }
@@ -31,23 +32,20 @@ const Password = ({
 
   return (
       <tr>
-        <td>{firstName} {lastName}</td>
+        <td>{accountName} {accountUrl}</td>
         <td>{email}</td>
-        <td>{phone}</td>
-        <td>{jobTitle} @ {company}</td>
+        <td>{password}</td>
         <td><Button onClick={previewPassword}>Preview</Button></td>
         <td><Button onClick={editPassword}>Edit</Button></td>
         <td><Button onClick={deletePassword}>Delete</Button></td>
         
         <EditPasswordModal
           show={editModal}
-          firstname={firstName}
-          lastname={lastName}
+          accountName={accountName}
+          accountUrl={accountUrl}
           email={email}
-          phone={phone}
-          jobtitle={jobTitle}
-          title={"Edit Password for "+firstName}
-          company={company}
+          password={password}
+          title={"Edit Password for "+title_}
           onHide={() => {
             let n = window.confirm("Your changes won't be saved...")
             if (n) setEditModal(false)
@@ -55,20 +53,18 @@ const Password = ({
           onEdit ={(Password) => {
             // save Password to dB
             // setPasswords([Password, ...Passwords])
-            alert(`Password for ${firstName} updated successfully`)
+            alert(`Password for ${accountName || accountUrl} updated successfully`)
             setEditModal(false)
           }}
         />
         <PreviewPasswordModal
           show={previewModal}
           onEdit={()=>{setEditModal(true)}}
-          firstname={firstName}
-          lastname={lastName}
+          accountName={accountName}
+          accountUrl={accountUrl}
           email={email}
-          phone={phone}
-          jobtitle={jobTitle}
-          title={"Preview Password for "+firstName}
-          company={company}
+          password={password}
+          title={"Preview Password for "+title_}
           onHide={() => {setpreviewModal(false)}}
         />
       </tr>

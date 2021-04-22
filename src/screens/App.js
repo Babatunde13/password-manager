@@ -2,34 +2,35 @@ import { useState, useEffect } from 'react'
 // import {  createContact} from "./models";
 import data from '../data'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Contacts from '../components/Contacts';
+import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
 
 const AppDashboard = () => {
-  const [contacts, setContacts] = useState([])
+  const [passwords, setPasswords] = useState([])
 
   useEffect(() => {
-    setContacts(data)
+    setPasswords(data)
   }, [])
+  console.log(passwords)
 
   return (
    <>
       <NavbarComponent 
-        contacts={contacts} 
-        onCreate={ contact => {
+        contacts={ passwords} 
+        onCreate={ password => {
           //  save to dB
-          setContacts([contact, ...contacts])
+          setPasswords([password, ...passwords])
           alert('New contact created successfully')
         }
       }/>
-      <Contacts 
-        contacts={contacts}
+      <Passwords 
+        passwords={passwords}
         handleEdit={(id) => {
           // create an edit Modal
             
         }}
         handleDelete={(id) => {
-          setContacts(contacts.filter( ele =>  ele.id !== id)) 
+          setPasswords(passwords.filter( ele =>  ele.id !== id)) 
         }}  
       />
    </>

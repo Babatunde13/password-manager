@@ -59,7 +59,7 @@ const EditPasswordModal = props  => {
             </Row>
             <Row>
               <Form.Group as={Col}>
-                <Form.Control type="phone" value={password} placeholder="******" onChange={(e) => setPassword(e.target.value)}/>
+                <Form.Control type="password" value={password} placeholder="******" onChange={(e) => setPassword(e.target.value)}/>
               </Form.Group>
             </Row>
           </Form>
