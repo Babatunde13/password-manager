@@ -10,26 +10,18 @@ import Col from "react-bootstrap/Col";
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 
-const EditContactModal = props  => {
-  const [firstName, setFirstName] = useState(props.firstname)
-  const [lastName, setLastName] = useState(props.lastname) 
+const EditPasswordModal = props  => {
+  const [accountName, setAccountName] = useState(props.accountName)
+  const [accountUrl, setAccountUrl] = useState(props.accountUrl) 
   const [email, setEmail] = useState(props.email)
-  const [company, setCompany] = useState(props.company) 
-  const [jobTitle, setJobTitle] = useState(props.jobtitle) 
-  const [phone, setPhone] = useState(props.phone) 
-  const [address, setAddress] = useState(props.address)
-  const [avatar, setAvatar] = useState(props.avatar)
+  const [password, setPassword] = useState(props.password) 
+  
 
   const onEdit = () => {
     const payload = {
-      firstName,
-      lastName,
+      accountName,
+      accountUrl,
       email,
-      company,
-      jobTitle,
-      phone, 
-      address,
-      avatar
     }
     console.log(payload)
     // save to db
@@ -54,38 +46,20 @@ const EditContactModal = props  => {
           <Form>
             <Row>
               <Form.Group as={Col}>
-                  <Form.Control type="file" value={avatar} onChange={(e) => {setAvatar(e.target.files[0])}} />
-                </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                <Form.Control placeholder="Account Name" value={accountName} onChange={(e) => setAccountName(e.target.value)}/>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Control placeholder="Last name" value={props.lastName} onChange={(e) => setLastName(e.target.value)}/>
+                <Form.Control placeholder="Account URL" value={accountUrl} onChange={(e) => setAccountUrl(e.target.value)}/>
               </Form.Group>
             </Row>
             <Row>
               <Form.Group as={Col}>
-                <Form.Control type="email" value={props.email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                <Form.Control type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
               </Form.Group>
             </Row>
             <Row>
               <Form.Group as={Col}>
-                <Form.Control type="phone" value={props.phone} placeholder="Phone number(+2348180854296)" onChange={(e) => setPhone(e.target.value)}/>
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="Address" value={props.address} onChange={(e) => setAddress(e.target.value)}/>
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="Company" value={props.company} onChange={(e) => setCompany(e.target.value)}/>
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="Job Title" value={props.jobTitle} onChange={(e) => setJobTitle(e.target.value)}/>
+                <Form.Control type="phone" value={password} placeholder="******" onChange={(e) => setPassword(e.target.value)}/>
               </Form.Group>
             </Row>
           </Form>
@@ -93,11 +67,11 @@ const EditContactModal = props  => {
       </Modal.Body>
     <Modal.Footer>
         <Button variant="danger" onClick={props.onHide}>Close</Button>
-        <Button variant="success" onClick={onEdit} disabled={(!firstName || !lastName || !phone) ? true : false}>Edit</Button>
+        <Button variant="success" onClick={onEdit} disabled={(!accountUrl || !accountName || !email) ? true : false}>Edit</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
 
-export default EditContactModal
+export default EditPasswordModal

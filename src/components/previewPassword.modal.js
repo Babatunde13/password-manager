@@ -5,8 +5,9 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const PreviewContactModal = props  => (
-    <Modal
+const PreviewPasswordModal = props  => {
+    const [password, setPassword] = useState("*"*props.password.length)
+    return <Modal
       {...props}
       size="xlg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -21,15 +22,10 @@ const PreviewContactModal = props  => (
         <Container>
           <Row>
             <Col>
-                <img src={props.avatar} alt=""/>
-              </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>{props.firstname}</div>
+              <div>{props.accountName}</div>
             </Col>
             <Col>
-              <div>{props.lastname}</div>
+              <div>{props.accountUrl}</div>
             </Col>
           </Row>
           <Row>
@@ -37,20 +33,7 @@ const PreviewContactModal = props  => (
               <div>{props.email}</div>
             </Col>
             <Col>
-              <div>{props.phone}</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>{props.address}</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <div>{props.company}</div>
-            </Col>
-            <Col>
-              <div>{props.jobtitle}</div>
+              <div>{password} <Button onClick={() => {setPassword(props.password)}}>Preview</Button></div>
             </Col>
           </Row>
         </Container>
@@ -60,6 +43,6 @@ const PreviewContactModal = props  => (
         <Button variant="danger" onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
-  );
+}
 
-export default PreviewContactModal
+export default PreviewPasswordModal

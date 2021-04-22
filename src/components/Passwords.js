@@ -2,34 +2,31 @@ import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
-import EditContactModal from './editContact.modal'
-import PreviewContactModal from './previewContact.modal'
+import EditPasswordModal from './editPassword.modal'
+import PreviewPasswordModal from './previewPassword.modal'
 
-const Contact = ({
+const Password = ({
   id,
-  firstName,
-  lastName,
+  accountName,
+  accountUrl,
   email,
-  phone,
-  company,
-  jobTitle,
-  handleDelete
+  password
 }) => {
   const [editModal, setEditModal] = useState(false)
   const [previewModal, setpreviewModal] = useState(false)
 
-  const editContact = () => {
+  const editPassword = () => {
     setEditModal(true)
   }
 
-  const previewContact = () => {
+  const previewPassword = () => {
     setpreviewModal(true)
   }
 
-  const deleteContact = () => {
+  const deletePassword = () => {
     console.log(id)
     handleDelete(id)
-    alert('Contact deleted successfully')
+    alert('Password deleted successfully')
   }
 
   return (
@@ -38,31 +35,31 @@ const Contact = ({
         <td>{email}</td>
         <td>{phone}</td>
         <td>{jobTitle} @ {company}</td>
-        <td><Button onClick={previewContact}>Preview</Button></td>
-        <td><Button onClick={editContact}>Edit</Button></td>
-        <td><Button onClick={deleteContact}>Delete</Button></td>
+        <td><Button onClick={previewPassword}>Preview</Button></td>
+        <td><Button onClick={editPassword}>Edit</Button></td>
+        <td><Button onClick={deletePassword}>Delete</Button></td>
         
-        <EditContactModal
+        <EditPasswordModal
           show={editModal}
           firstname={firstName}
           lastname={lastName}
           email={email}
           phone={phone}
           jobtitle={jobTitle}
-          title={"Edit Contact for "+firstName}
+          title={"Edit Password for "+firstName}
           company={company}
           onHide={() => {
             let n = window.confirm("Your changes won't be saved...")
             if (n) setEditModal(false)
           }}
-          onEdit ={(contact) => {
-            // save contact to dB
-            // setContacts([contact, ...contacts])
-            alert(`Contact for ${firstName} updated successfully`)
+          onEdit ={(Password) => {
+            // save Password to dB
+            // setPasswords([Password, ...Passwords])
+            alert(`Password for ${firstName} updated successfully`)
             setEditModal(false)
           }}
         />
-        <PreviewContactModal
+        <PreviewPasswordModal
           show={previewModal}
           onEdit={()=>{setEditModal(true)}}
           firstname={firstName}
@@ -70,7 +67,7 @@ const Contact = ({
           email={email}
           phone={phone}
           jobtitle={jobTitle}
-          title={"Preview Contact for "+firstName}
+          title={"Preview Password for "+firstName}
           company={company}
           onHide={() => {setpreviewModal(false)}}
         />
@@ -78,10 +75,10 @@ const Contact = ({
   )
 }
 
-const Contacts = ({contacts, handleEdit, handleDelete}) => {
+const Passwords = ({passwords, handleEdit, handleDelete}) => {
   return (
     <>
-      {!contacts && 'Fetching contacts...'}
+      {!passwords && 'Fetching Passwords...'}
       <Table striped bordered hover responsive>
         <thead>
           <tr>
@@ -95,7 +92,7 @@ const Contacts = ({contacts, handleEdit, handleDelete}) => {
           </tr>
         </thead>
         <tbody>
-        {contacts.map(ele => <Contact {...ele} 
+        {passwords.map(ele => <Password {...ele} 
           key={ele.id} 
           handleEdit={handleEdit} 
           handleDelete={handleDelete} />)} 
@@ -105,4 +102,4 @@ const Contacts = ({contacts, handleEdit, handleDelete}) => {
   )
 }
 
-export default Contacts
+export default Passwords

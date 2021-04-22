@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import {Link} from 'react-router-dom'
-import CreateContactModal from '../components/createContact.modal'
+import CreatePasswordModal from '../components/createPassword.modal'
 
 const NavbarComponent = (props) => {
   const [createModalShow, setCreateModalShow] = useState(false);
@@ -31,9 +31,9 @@ const NavbarComponent = (props) => {
           {props.onCreate &&
           <>
             <Button variant="primary" onClick={() => setCreateModalShow(true)}>
-              Create New Contact
+              Create New Password
             </Button>
-            <CreateContactModal
+            <CreatePasswordModal
               show={createModalShow}
               onHide={handleHide}
               onCreate ={(payload) => {props.onCreate(payload); setCreateModalShow(false)}}

@@ -10,26 +10,18 @@ import Col from "react-bootstrap/Col";
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 
-const CreateContactModal = (props)  => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('') 
+const CreatePasswordModal = (props)  => {
+  const [accountName, setAccountName] = useState('')
+  const [accountUrl, setAccountUrl] = useState('') 
   const [email, setEmail] = useState('')
-  const [company, setCompany] = useState('') 
-  const [jobTitle, setJobTitle] = useState('') 
-  const [phone, setPhone] = useState('') 
-  const [address, setAddress] = useState('')
-  const [avatar, setAvatar] = useState('')
+  const [password, setPassword] = useState('') 
 
   const onCreate = () => {
     const payload = {
-      firstName,
-      lastName,
+      accountName,
+      accountUrl,
       email,
-      company,
-      jobTitle,
-      phone, 
-      address,
-      avatar
+      password
     }
     // save to db
     // add to DOM
@@ -37,14 +29,10 @@ const CreateContactModal = (props)  => {
   }
 
   const onHide = () => {
-    setFirstName('')
-    setLastName('')
+    setAccountName('')
+    setAccountUrl('')
     setEmail('')
-    setPhone('')
-    setJobTitle('')
-    setAvatar('')
-    setAddress('')
-    setCompany('')
+    setPassword('')
     props.onHide()
   }
 
@@ -58,46 +46,28 @@ const CreateContactModal = (props)  => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Create New Contact
+          Create New Password
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
         <Container>
-          <Form>
+        <Form>
             <Row>
               <Form.Group as={Col}>
-                  <Form.Control type="file" value={avatar} onChange={(e) => {setAvatar(e.target.files[0])}} />
-                </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+                <Form.Control placeholder="Account Name" value={accountName} onChange={(e) => setAccountName(e.target.value)}/>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Control placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+                <Form.Control placeholder="Account URL" value={accountUrl} onChange={(e) => setAccountUrl(e.target.value)}/>
               </Form.Group>
             </Row>
             <Row>
               <Form.Group as={Col}>
-                <Form.Control type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <Form.Control type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
               </Form.Group>
             </Row>
             <Row>
               <Form.Group as={Col}>
-                <Form.Control type="phone" placeholder="Phone number(+2348180854296)" value={phone} onChange={(e) => setPhone(e.target.value)}/>
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)}/>
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="Company" value={company} onChange={(e) => setCompany(e.target.value)}/>
-              </Form.Group>
-              <Form.Group as={Col}>
-                <Form.Control placeholder="Job Title" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)}/>
+                <Form.Control type="phone" value={password} placeholder="******" onChange={(e) => setPassword(e.target.value)}/>
               </Form.Group>
             </Row>
           </Form>
@@ -105,11 +75,11 @@ const CreateContactModal = (props)  => {
       </Modal.Body>
     <Modal.Footer>
         <Button variant="danger" onClick={props.onHide}>Close</Button>
-        <Button variant="success" onClick={onCreate} disabled={(!firstName || !lastName || !phone) ? true : false}>Create</Button>
+        <Button variant="success" onClick={onCreate} disabled={(!accountUrl || !accountName || !email) ? true : false}>Create</Button>
       </Modal.Footer>
     </Modal>
   );
 }
 
 
-export default CreateContactModal
+export default CreatePasswordModal
