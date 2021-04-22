@@ -15,7 +15,8 @@ const Password = ({
   accountUrl,
   email,
   password,
-  handleDelete
+  handleDelete,
+  handleEdit
 }) => {
   // eslint-disable-next-line
   const [editModal, setEditModal] = useState(false)
@@ -25,6 +26,12 @@ const Password = ({
   const previewPassword = () => {
     setpreviewModal(true)
   }
+
+  const editPassword = (payload) => {
+    handleEdit(payload)
+    setEditModal(true)
+  }
+
 
   const deletePassword = () => {
     console.log(id)
@@ -49,6 +56,7 @@ const Password = ({
           accountUrl={accountUrl}
           email={email}
           password={password}
+          editPassword={handleEdit}
           title={"Preview Password for "+title_}
           onHide={() => {setpreviewModal(false)}}
         />

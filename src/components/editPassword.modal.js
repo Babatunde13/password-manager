@@ -22,11 +22,12 @@ const EditPasswordModal = props  => {
       accountName,
       accountUrl,
       email,
+      id: props.id
     }
     console.log(payload)
     // save to db
     // add to DOM
-    props.onEdit(payload)
+    props.editPassword(payload)
   }
 
   return (

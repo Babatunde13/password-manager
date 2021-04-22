@@ -18,15 +18,11 @@ const NavbarComponent = (props) => {
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Navbar.Brand>
         <Button onClick={() => {window.location.assign("/")}} style={{listStyle: 'none', color: 'white'}}>Home</Button>
-        </Navbar.Brand>
-        <Nav className="mr-auto">
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form> 
-          <Navbar.Brand>
+      </Navbar.Brand>
+      <Nav className="mr-auto">
+        <Navbar.Brand>
           <Button onClick={() => {window.location.assign("/dashboard")}} style={{listStyleType: 'none', color: 'white'}}>Dashboard</Button>
-          </Navbar.Brand>
+        </Navbar.Brand>
           {props.onCreate &&
           <>
             <Button variant="primary" onClick={() => setCreateModalShow(true)}>

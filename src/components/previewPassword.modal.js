@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal'
-import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import EditPasswordModal from "./editPassword.modal";
+import url from '../assets/url.png';
 
 const PreviewPasswordModal = props  => {
-    const [password, setPassword] = useState("*".repeat(props.password.length))
+    const [passwordType, setPasswordType] = useState('password')
     return <Modal
       {...props}
       size="xlg"
@@ -17,8 +18,9 @@ const PreviewPasswordModal = props  => {
       centered
     >
       <Modal.Header closeButton>
+      <Button variant="danger" onClick={props.onHide}>Close</Button>
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.accountName}
+          <img src={url} alt=""/> {props.accountName}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
@@ -28,21 +30,23 @@ const PreviewPasswordModal = props  => {
               <div><Link to={props.accountUrl} target="_blank"><small>{props.accountName}</small></Link></div>
             </Col>
             <Col>
-              <div><Form.Control type="text" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.email} disabled/></div>
-              <div><Form.Control type="password" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.password} disabled/></div>
-              <div>{password} <Button onClick={() => {setPassword(password === props.password? "*".repeat(props.password.length) : props.password)}}>{password === props.password? "Hide": "Preview"}</Button></div>
+              <div><FormControl type="text" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.email} disabled/></div>
+              <div>
+                <FormControl type={passwordType} style={{width: '18em', padding: '20px', margin: '5px'}} value={props.password} disabled/>
+                <Button onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>{passwordType === "password"? "Preview": "Hide"}</Button>
+              </div>
             </Col>
           </Row>
-
         </Container>
       </Modal.Body>
     <Modal.Footer>
+      {console.log(props.edit)}
         <Button onClick={props.onEdit}>Edit</Button>
         <Button variant="danger" onClick={props.onDelete}>Delete</Button>
-        <Button variant="danger" onClick={props.onHide}>Close</Button>
       </Modal.Footer>
       <EditPasswordModal
-          show={props.editModal}
+          show={props.edit}
+          editPassword={props.editPassword}
           onEdit={props.onEdit}
           accountName={props.accountName}
           accountUrl={props.accountUrl}

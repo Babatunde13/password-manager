@@ -17,7 +17,7 @@ const AppDashboard = () => {
   return (
    <>
       <NavbarComponent 
-        contacts={ passwords} 
+        passwords={ passwords} 
         onCreate={ password => {
           //  save to dB
           setPasswords([password, ...passwords])
@@ -31,9 +31,9 @@ const AppDashboard = () => {
 
       <Passwords 
         passwords={passwords}
-        handleEdit={(id) => {
+        handleEdit={(payload) => {
           // create an edit Modal
-            
+            setPasswords(passwords.map(password => password.id === payload.id? password : payload))
         }}
         handleDelete={(id) => {
           setPasswords(passwords.filter( ele =>  ele.id !== id)) 
