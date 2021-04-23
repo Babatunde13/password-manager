@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Card from "react-bootstrap/Card";
-// import {  createContact} from "./models";
+import { getPasswordsByUserID } from "../models";
 import data from '../data'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Passwords from '../components/Passwords';
@@ -8,9 +8,15 @@ import NavbarComponent from '../components/Navbar';
 
 const AppDashboard = () => {
   const [passwords, setPasswords] = useState([])
+  const [isPending, setIsPending] = useState(false)
 
   useEffect(() => {
-    setPasswords(data)
+    setIsPending(true)
+    const getContacts = () => {
+      return getPasswordsByUserID(localStorage.getItem('userId'))
+    }
+    setPasswords(getContacts())
+    setIsPending(false)
   }, [])
   console.log(passwords)
 

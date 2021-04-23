@@ -58,7 +58,7 @@ export const createPassword = async (accountName, accountUrl, email, password, u
   ]
   let newPassword = await client.query(
     q.Create(
-      q.Collection('Passwords'),
+      q.Collection('passwords'),
       {
         data: {
           accountName,
@@ -94,7 +94,7 @@ export const getPasswordsByUserID = async id => {
 
 export const getPassword = async id => {
   let password = await client.query(
-    q.Get(q.Ref(q.Collection('Passwords'), id))
+    q.Get(q.Ref(q.Collection('passwords'), id))
   )
   if (password.name === "NotFound") return
   if (password.name === "BadRequest") return "Something went wrong"
@@ -105,6 +105,19 @@ export const getPassword = async id => {
 export const updatePassword = async (payload, id) => {
   let password = await client.query(
     q.Update(
+      q.Ref(q.Collection('Passwords'), id),
+      {data: {payload}}
+    )
+  )
+  if (password.name === "NotFound") return
+  if (password.name === "BadRequest") return "Something went wrong"
+  password.data.id = password.ref.value.id
+  return password.data
+}
+
+export const deletePassword = async (payload, id) => {
+  let password = await client.query(
+    q.Delete(
       q.Ref(q.Collection('Passwords'), id),
       {data: {payload}}
     )
