@@ -3,10 +3,12 @@ import { useHistory } from 'react-router-dom';
 import {loginUser} from '../models'
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 export default function SignIn() {
   let history = useHistory()
   const [validated, setValidated] = useState(false);
+  let emailError, passwordError
 
   if (localStorage.getItem('userId')) {
   history.push('/') 
@@ -36,7 +38,7 @@ export default function SignIn() {
     }
   }
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleSubmit} style={{margin: 'auto'}}>
       <Form.Row>
         <Form.Group as={Col} md="6" controlId="validationCustom01">
           <Form.Label>First name</Form.Label>
@@ -48,8 +50,10 @@ export default function SignIn() {
           />
           <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
         </Form.Group>
+      </Form.Row>
+      <Form.Row>
         <Form.Group as={Col} md="6" controlId="validationCustom02">
-          <Form.Label>Looks good!</Form.Label>
+          <Form.Label>Password</Form.Label>
           <Form.Control
             required
             ref={password}
@@ -59,6 +63,7 @@ export default function SignIn() {
           <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
         </Form.Group>
       </Form.Row>
+      <Button type="submit">SignUp</Button>
     </Form>
   )
 }
