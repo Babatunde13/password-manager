@@ -42,7 +42,9 @@ const NavbarComponent = (props) => {
               <Link to="/dashboard" style={{listStyleType: 'none', color: 'white'}}>Dashboard</Link>
             </Nav.Item>
             <Nav.Item style={{padding: '15px'}}>
-              <Link to="/logout" style={{listStyleType: 'none', color: 'white'}}>Logout</Link>
+              <Link to="/logout" 
+                style={{listStyleType: 'none', color: 'white'}}
+                onClick={() => {localStorage.clear(); window.location.assign('/')}}>Logout</Link>
             </Nav.Item>
         </>
         }
