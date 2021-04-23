@@ -21,6 +21,16 @@ const NavbarComponent = (props) => {
         <Navbar.Brand>
           <Button onClick={() => {window.location.assign("/dashboard")}} style={{listStyleType: 'none', color: 'white'}}>Dashboard</Button>
         </Navbar.Brand>
+        {localStorage.getItem('userId') &&
+        <>
+          <Navbar.Brand>
+            <Button onClick={() => {window.location.assign("/login")}} style={{listStyleType: 'none', color: 'white'}}>Login</Button>
+          </Navbar.Brand>
+          <Navbar.Brand>
+            <Button onClick={() => {window.location.assign("/register")}} style={{listStyleType: 'none', color: 'white'}}>Register</Button>
+          </Navbar.Brand>
+        </>
+        }
           {props.onCreate &&
           <>
             <Button variant="primary" onClick={() => setCreateModalShow(true)}>

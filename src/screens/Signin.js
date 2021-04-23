@@ -7,12 +7,12 @@ import Button from "react-bootstrap/Button";
 import NavbarComponent from '../components/Navbar';
 
 export default function SignIn() {
+  if (localStorage.getItem('user')) {
+    history.push('/') 
+    }
   let history = useHistory()
   const [validated, setValidated] = useState(false);
 
-  if (localStorage.getItem('userId')) {
-  history.push('/') 
-  }
   const email = useRef('')
   const password = useRef('')
 

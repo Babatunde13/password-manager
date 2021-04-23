@@ -26,6 +26,7 @@ export default function SignIn() {
       lastName: lastName.current.value,
       password: password.current.value
     }
+    console.log(body)
     if (body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value) {
       const user = await createUser(body.firstName, body.email, body.lastName, body.password)
       if (!user) {
