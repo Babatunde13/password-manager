@@ -74,7 +74,7 @@ const Passwords = ({passwords, handleEdit, handleDelete}) => {
          <Row style={{display: 'flex', justifyContent: 'space-between'}}>
           {passwords.length} Sites and Apps
             <Form inline>
-              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onK/>
+              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onKeyDown={() => {}}/>
             </Form>
           </Row> 
         </Card.Header> <br/><br/>

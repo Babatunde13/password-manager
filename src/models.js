@@ -50,7 +50,7 @@ export const loginUser = async (email, password) => {
   else return
 }
 
-export const createPassword = async (accountName, accountUrl, email, password) => {
+export const createPassword = async (accountName, accountUrl, email, password, userId) => {
   let user = await getUser(userId)
   const date = new Date()
   const months = [
@@ -112,6 +112,6 @@ export const updatePassword = async (payload, id) => {
   )
   if (password.name === "NotFound") return
   if (password.name === "BadRequest") return "Something went wrong"
-  Password.data.id = password.ref.value.id
+  password.data.id = password.ref.value.id
   return password.data
 }

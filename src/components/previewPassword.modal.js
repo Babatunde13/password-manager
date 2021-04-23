@@ -48,7 +48,6 @@ const PreviewPasswordModal = props  => {
         </Container>
       </Modal.Body>
     <Modal.Footer>
-      {console.log(props.edit)}
         <Button onClick={props.onEdit}>Edit</Button>
         <Button variant="danger" onClick={props.onDelete}>Delete</Button>
       </Modal.Footer>
