@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Card from "react-bootstrap/Card";
-import { getPasswordsByUserID } from "../models";
+import { getPasswordsByUserID, createPassword } from "../models";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
@@ -12,9 +12,9 @@ const AppDashboard = () => {
   useEffect(() => {
     setIsPending(true)
     const getContacts = async () => {
-      return getPasswordsByUserID(localStorage.getItem('userId'))
+      setPasswords(getPasswordsByUserID(localStorage.getItem('userId')))
     }
-    setPasswords(getContacts())
+    getContacts()
     setIsPending(false)
   }, [])
 
@@ -22,9 +22,17 @@ const AppDashboard = () => {
    <>
       <NavbarComponent 
         passwords={ passwords} 
-        onCreate={ password => {
+        onCreate={ async(password) => {
           //  save to dB
-          setPasswords([password, ...passwords])
+          password.userId = localStorage.getItem('userId')
+          const newPassword = await createPassword(
+            password.accountName, 
+            password.accountUrl,
+            password.password,
+            password.userId)
+          console.log(passwords)
+          console.log(newPassword)
+          setPasswords([newPassword])
           alert('New contact created successfully')
         }
       }/>
@@ -32,7 +40,8 @@ const AppDashboard = () => {
       <Card>
 
       </Card>
-
+      {isPending && 'Fetching Passwords...'}
+      {passwords.length === 0 ? 
       <Passwords 
         passwords={passwords}
         handleEdit={(payload) => {
@@ -44,7 +53,7 @@ const AppDashboard = () => {
         handleDelete={(id) => {
           setPasswords(passwords.filter( ele =>  ele.id !== id)) 
         }}  
-      />
+      /> : <Card>You haven't created any password</Card>}
    </>
   );
 }

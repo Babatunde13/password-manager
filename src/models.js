@@ -3,10 +3,12 @@ import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 
 dotenv.config()
+
 const client = new faunadb.Client({secret: process.env.REACT_APP_FAUNA_KEY})
 
-export  const createUser = async (firstName, email, lastName, password) => {
-  password = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+export  const createUser = async (firstName, lastName, email, password) => {
+  password = await bcrypt.hash(password, bcrypt.genSaltSync(10))
+  console.log(password)
   let newUser = await client.query(
     q.Create(
       q.Collection('users'),
@@ -51,6 +53,7 @@ export const loginUser = async (email, password) => {
 
 export const createPassword = async (accountName, accountUrl, email, password, userId) => {
   let user = await getUser(userId)
+  console.log(user)
   const date = new Date()
   const months = [
     "January", "February", "March", "April", "May", "June",
@@ -69,7 +72,7 @@ export const createPassword = async (accountName, accountUrl, email, password, u
           user: {
             name:user.name, 
             email: user.email, 
-            id:user.id
+            id: user.id
           }
         }
       }
@@ -81,15 +84,22 @@ export const createPassword = async (accountName, accountUrl, email, password, u
 }
 
 export const getPasswordsByUserID = async id => {
-  let userPasswords = await client.query(
-    q.Get(
-      q.Match(q.Index('user_passwords'), id)
+  try {
+    let userPasswords = await client.query(
+      q.Get(
+        q.Match(q.Index('user_passwords'), id)
+      )
     )
-  )
-  if (userPasswords.name === "NotFound") return
-  if (userPasswords.name === "BadRequest") return "Something went wrong"
-  userPasswords.data.id = userPasswords.ref.value.id
-  return userPasswords.data
+    console.log(userPasswords )
+    console.log(userPasswords)
+    if (userPasswords.name === "NotFound") return
+    if (userPasswords.name === "BadRequest") return "Something went wrong"
+    userPasswords.data.id = userPasswords.ref.value.id
+    console.log(userPasswords)
+    return userPasswords.data
+  } catch (error) {
+    return
+  }
 }
 
 export const getPassword = async id => {

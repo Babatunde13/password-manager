@@ -79,7 +79,6 @@ const Passwords = ({passwords, handleEdit, handleDelete}) => {
           </Row> 
         </Card.Header> <br/><br/>
         <Card.Body>
-          {!passwords && 'Fetching Passwords...'}
           {passwords.map(ele => 
             <Password 
               {...ele} 

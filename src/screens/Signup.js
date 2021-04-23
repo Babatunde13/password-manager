@@ -21,16 +21,16 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const body = {
-      email: email.current.value,
       firstName: firstName.current.value,
       lastName: lastName.current.value,
+      email: email.current.value,
       password: password.current.value
     }
     console.log(body)
     if (body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value) {
-      const user = await createUser(body.firstName, body.email, body.lastName, body.password)
+      const user = await createUser(body.firstName, body.lastName, body.email, body.password)
       if (!user) {
-        alert('Email or username has been chosen')
+        alert('Email has been chosen')
       } else {
         localStorage.setItem('userId', user.id)
         localStorage.setItem('email', user.email)
@@ -90,7 +90,7 @@ export default function SignIn() {
         <Form.Row>
           <Form.Group as={Col} md="6" controlId="validationCustom03">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="........" required ref={password} />
+            <Form.Control type="password" placeholder="Password" required ref={password} />
             <Form.Control.Feedback type="invalid">
               Please provide a password between 8 and 20.
             </Form.Control.Feedback>
@@ -98,7 +98,7 @@ export default function SignIn() {
           </Form.Group>
           <Form.Group as={Col} md="6" controlId="validationCustom04">
             <Form.Label>Confirm Password</Form.Label>
-            <Form.Control type="password" placeholder="......" required ref={confirm_password} />
+            <Form.Control type="password" placeholder="Confirm Password" required ref={confirm_password} />
             <Form.Control.Feedback type="invalid">
               Fields do not match.
             </Form.Control.Feedback>
