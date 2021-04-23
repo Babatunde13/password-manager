@@ -20,26 +20,28 @@ const NavbarComponent = (props) => {
       <Nav className="justify-content-end" activeKey="/home">
         {!localStorage.getItem('userId')  ? 
           <>
-            <Nav.Link variant="primary" style={{listStyleType: 'none', color: 'white', padding: '5px'}} onClick={() => setCreateModalShow(true)}>
-              Create New Password
-            </Nav.Link>
-            <CreatePasswordModal
-              show={createModalShow}
-              onHide={handleHide}
-              onCreate ={(payload) => {props.onCreate(payload); setCreateModalShow(false)}}
-            />
-            <Nav.Item style={{padding: '5px'}}>
+            <Nav.Item style={{padding: '15px'}}>
               <Link to="/login" style={{listStyleType: 'none', color: 'white'}}>Login</Link>
             </Nav.Item>
-            <Nav.Item style={{padding: '5px'}}>
+            <Nav.Item style={{padding: '15px'}}>
               <Link to="/register" style={{listStyleType: 'none', color: 'white'}}>Register</Link>
             </Nav.Item>
           </> : 
           <>
-            <Nav.Item style={{padding: '5px'}}>
+            <CreatePasswordModal
+                show={createModalShow}
+                onHide={handleHide}
+                onCreate ={(payload) => {props.onCreate(payload); setCreateModalShow(false)}}
+              />
+            <Nav.Item style={{padding: '15px'}}>
+              <Nav.Link variant="primary" style={{listStyleType: 'none', color: 'white'}} onClick={() => setCreateModalShow(true)}>
+                Create New Password
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item style={{padding: '15px'}}>
               <Link to="/dashboard" style={{listStyleType: 'none', color: 'white'}}>Dashboard</Link>
             </Nav.Item>
-            <Nav.Item style={{padding: '5px'}}>
+            <Nav.Item style={{padding: '15px'}}>
               <Link to="/logout" style={{listStyleType: 'none', color: 'white'}}>Logout</Link>
             </Nav.Item>
         </>
