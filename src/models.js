@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 const client = new faunadb.Client({secret: process.env.REACT_APP_FAUNA_KEY})
 
-export  const createUser = async (firstName, email, lastName, password, avatar) => {
+export  const createUser = async (firstName, email, lastName, password) => {
   password = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
   let newUser = await client.query(
     q.Create(
@@ -15,8 +15,7 @@ export  const createUser = async (firstName, email, lastName, password, avatar) 
           firstName, 
           email, 
           lastName, 
-          password,
-          avatar
+          password
         }
       }
     )
