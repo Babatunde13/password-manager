@@ -49,12 +49,13 @@ const AppDashboard = () => {
         handleEdit={async payload => {
           // create an edit Modal
           console.log(payload)
-            await updatePassword({
+            let data = await updatePassword({
               accountName: payload.accountName,
               accountUrl: payload.accountUrl,
               email: payload.email,
               password: payload.password
             }, payload.id)
+            console.log(data)
             setPasswords(passwords.map( password => password.id === payload.id? payload : password))
         }}
         handleDelete={async id => {

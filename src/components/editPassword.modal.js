@@ -25,9 +25,6 @@ const EditPasswordModal = props  => {
       password,
       id: props.id
     }
-    console.log(payload)
-    // save to db
-    // add to DOM
     props.editPassword(payload)
   }
 

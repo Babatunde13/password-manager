@@ -121,7 +121,7 @@ export const updatePassword = async (payload, id) => {
   let password = await client.query(
     q.Update(
       q.Ref(q.Collection('passwords'), id),
-      {data: {payload}}
+      {data: payload}
     )
   )
   if (password.name === "NotFound") return
