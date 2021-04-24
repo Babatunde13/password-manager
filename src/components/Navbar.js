@@ -12,6 +12,11 @@ const NavbarComponent = (props) => {
     if (n) setCreateModalShow(false)
   }
 
+  const handleCreate = payload => {
+    props.handleCreate(payload)
+    setCreateModalShow(false)
+  }
+
   return (
     <Navbar collapseOnSelect className="justify-content-between" expand="sm" bg="primary" variant="pill">
       <Navbar.Brand>
@@ -31,7 +36,7 @@ const NavbarComponent = (props) => {
             <CreatePasswordModal
                 show={createModalShow}
                 onHide={handleHide}
-                onCreate ={(payload) => {props.onCreate(payload); setCreateModalShow(false)}}
+                handleCreate={ handleCreate }
               />
             <Nav.Item style={{padding: '15px'}}>
               <Nav.Link variant="primary" style={{listStyleType: 'none', color: 'white'}} onClick={() => setCreateModalShow(true)}>

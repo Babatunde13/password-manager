@@ -53,7 +53,7 @@ const Password = ({
           edit={editModal}
           onHideEdit={()=>{setEditModal(false)}}
           onEdit={()=>{setEditModal(true)}}
-          onDelete={deletePassword}
+          onDelete={() => {deletePassword(); setpreviewModal(false)}}
           accountName={accountName}
           accountUrl={accountUrl}
           email={email}

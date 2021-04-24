@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 // import { fa } from '@fortawesome/free-brands-svg-icons'
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+// import { createPassword } from '../models';
 
 const CreatePasswordModal = (props)  => {
   const [accountName, setAccountName] = useState('')
@@ -16,16 +17,14 @@ const CreatePasswordModal = (props)  => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('') 
 
-  const onCreate = () => {
+  const handleCreate = async () => {
     const payload = {
-      accountName,
+      accountName, 
       accountUrl,
       email,
       password
     }
-    // save to db
-    // add to DOM
-    props.onCreate(payload)
+    props.handleCreate(payload)
   }
 
   const onHide = () => {
@@ -75,7 +74,7 @@ const CreatePasswordModal = (props)  => {
       </Modal.Body>
     <Modal.Footer>
         <Button variant="danger" onClick={props.onHide}>Close</Button>
-        <Button variant="success" onClick={onCreate} disabled={(!accountUrl || !accountName || !email) ? true : false}>Create</Button>
+        <Button variant="success" onClick={handleCreate} disabled={(!accountUrl || !accountName || !email) ? true : false}>Create</Button>
       </Modal.Footer>
     </Modal>
   );

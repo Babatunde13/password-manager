@@ -35,6 +35,7 @@ export const getUser = async (userId) => {
   )
   if (userData.name === "NotFound") return
   if (userData.name === "BadRequest") return "Something went wrong"
+  userData.data.id = userData.ref.value.id
   return userData.data
 }
 
@@ -70,7 +71,6 @@ export const createPassword = async (accountName, accountUrl, email, password, u
           password,
           created__at: `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`,
           user: {
-            name:user.name, 
             email: user.email, 
             id: user.id
           }
@@ -84,20 +84,25 @@ export const createPassword = async (accountName, accountUrl, email, password, u
 }
 
 export const getPasswordsByUserID = async id => {
+  let passwords = []
   try {
     let userPasswords = await client.query(
-      q.Get(
+      q.Paginate(
         q.Match(q.Index('user_passwords'), id)
       )
     )
     console.log(userPasswords )
-    console.log(userPasswords)
     if (userPasswords.name === "NotFound") return
     if (userPasswords.name === "BadRequest") return "Something went wrong"
-    userPasswords.data.id = userPasswords.ref.value.id
-    console.log(userPasswords)
-    return userPasswords.data
+    for (let passwordId of userPasswords.data) {
+      console.log(passwordId)
+      let password = await getPassword(passwordId.value.id)
+      passwords.push(password)
+    }
+    console.log(passwords)
+    return passwords
   } catch (error) {
+    
     return
   }
 }
@@ -128,8 +133,7 @@ export const updatePassword = async (payload, id) => {
 export const deletePassword = async (payload, id) => {
   let password = await client.query(
     q.Delete(
-      q.Ref(q.Collection('Passwords'), id),
-      {data: {payload}}
+      q.Ref(q.Collection('Passwords'), id)
     )
   )
   if (password.name === "NotFound") return

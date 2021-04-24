@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Card from "react-bootstrap/Card";
-import { getPasswordsByUserID, createPassword } from "../models";
+import { getPasswordsByUserID, createPassword, deletePassword } from "../models";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
@@ -9,10 +9,26 @@ const AppDashboard = () => {
   const [passwords, setPasswords] = useState([])
   const [isPending, setIsPending] = useState(false)
 
+  const handleCreate = async password => {
+    //  save to dB
+    password.userId = localStorage.getItem('userId')
+    const newPassword = await createPassword(
+      password.accountName, 
+      password.accountUrl,
+      password.password,
+      password.userId)
+    console.log(newPassword)
+    setPasswords([newPassword, ...passwords])
+    alert('New contact created successfully')
+  }
+
   useEffect(() => {
     setIsPending(true)
     const getContacts = async () => {
-      setPasswords(getPasswordsByUserID(localStorage.getItem('userId')))
+      setIsPending(true)
+      let passwordData = await getPasswordsByUserID(localStorage.getItem('userId'))
+      console.log(passwordData)
+      setPasswords(passwordData)
     }
     getContacts()
     setIsPending(false)
@@ -22,26 +38,12 @@ const AppDashboard = () => {
    <>
       <NavbarComponent 
         passwords={ passwords} 
-        onCreate={ async(password) => {
-          //  save to dB
-          password.userId = localStorage.getItem('userId')
-          const newPassword = await createPassword(
-            password.accountName, 
-            password.accountUrl,
-            password.password,
-            password.userId)
-          console.log(passwords)
-          console.log(newPassword)
-          setPasswords([newPassword])
-          alert('New contact created successfully')
-        }
-      }/>
+        handleCreate={ handleCreate }/>
 
       <Card>
 
       </Card>
-      {isPending && 'Fetching Passwords...'}
-      {passwords.length === 0 ? 
+      {isPending ? <Card>Fetching Passwords...</Card> :
       <Passwords 
         passwords={passwords}
         handleEdit={(payload) => {
@@ -50,10 +52,11 @@ const AppDashboard = () => {
             setPasswords(passwords.map( password => password.id === payload.id? payload : password))
             console.log(passwords.map( password => password.id === payload.id? payload : password))
         }}
-        handleDelete={(id) => {
+        handleDelete={async id => {
+          await deletePassword(id)
           setPasswords(passwords.filter( ele =>  ele.id !== id)) 
         }}  
-      /> : <Card>You haven't created any password</Card>}
+      /> }
    </>
   );
 }
