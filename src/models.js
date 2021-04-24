@@ -130,7 +130,7 @@ export const updatePassword = async (payload, id) => {
   return password.data
 }
 
-export const deletePassword = async (payload, id) => {
+export const deletePassword = async id => {
   let password = await client.query(
     q.Delete(
       q.Ref(q.Collection('passwords'), id)
