@@ -32,6 +32,10 @@ const CreatePasswordModal = (props)  => {
       encryptedPassword
     }
     props.handleCreate(payload)
+    setAccountName('')
+    setAccountUrl('')
+    setEmail('')
+    setPassword('')
   }
 
   const onHide = () => {

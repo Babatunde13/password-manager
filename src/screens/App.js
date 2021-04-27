@@ -64,7 +64,7 @@ const AppDashboard = () => {
               accountName: payload.accountName,
               accountUrl: payload.accountUrl,
               email: payload.email,
-              password: payload.password
+              encryptedPassword: payload.password
             }, payload.id)
             console.log(data)
             setPasswords(passwords.map( password => password.id === payload.id? payload : password))

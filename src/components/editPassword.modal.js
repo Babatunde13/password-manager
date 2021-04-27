@@ -9,6 +9,10 @@ import Col from "react-bootstrap/Col";
 // import { fa } from '@fortawesome/free-brands-svg-icons'
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import CryptoJS from "crypto-js";
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const EditPasswordModal = props  => {
   const [accountName, setAccountName] = useState(props.accountName)
@@ -18,11 +22,12 @@ const EditPasswordModal = props  => {
   
 
   const onEdit = () => {
+    const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_SECRET_KEY).toString()
     const payload = {
       accountName,
       accountUrl,
       email,
-      password,
+      encryptedPassword,
       id: props.id
     }
     props.editPassword(payload)
