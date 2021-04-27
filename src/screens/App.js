@@ -21,7 +21,7 @@ const AppDashboard = () => {
       password.accountName, 
       password.accountUrl,
       password.email,
-      password.password,
+      password.encryptedPassword,
       password.userId)
     console.log(newPassword)
     setPasswords([newPassword, ...passwords])

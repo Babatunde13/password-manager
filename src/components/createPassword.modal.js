@@ -5,11 +5,14 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import CryptoJS from "crypto-js";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { fa } from '@fortawesome/free-brands-svg-icons'
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
-// import { createPassword } from '../models';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const CreatePasswordModal = (props)  => {
   const [accountName, setAccountName] = useState('')
@@ -18,11 +21,15 @@ const CreatePasswordModal = (props)  => {
   const [password, setPassword] = useState('') 
 
   const handleCreate = async () => {
+    console.log(password)
+    console.log(process.env.REACT_APP_SECRET_KEY)
+    const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_SECRET_KEY).toString()
+    console.log(encryptedPassword)
     const payload = {
       accountName, 
       accountUrl,
       email,
-      password
+      encryptedPassword
     }
     props.handleCreate(payload)
   }

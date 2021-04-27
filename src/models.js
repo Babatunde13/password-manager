@@ -52,7 +52,7 @@ export const loginUser = async (email, password) => {
   else return
 }
 
-export const createPassword = async (accountName, accountUrl, email, password, userId) => {
+export const createPassword = async (accountName, accountUrl, email, encryptedPassword, userId) => {
   let user = await getUser(userId)
   console.log(user)
   const date = new Date()
@@ -68,7 +68,7 @@ export const createPassword = async (accountName, accountUrl, email, password, u
           accountName,
           accountUrl,
           email,
-          password,
+          encryptedPassword,
           created__at: `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`,
           user: {
             email: user.email, 

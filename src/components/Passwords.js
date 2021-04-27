@@ -4,10 +4,15 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import FormControl from "react-bootstrap/FormControl";
+import CryptoJS from "crypto-js";
+import dotenv from 'dotenv'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import PreviewPasswordModal from './previewPassword.modal'
 import web from '../assets/web.png';
+
+
+dotenv.config()
 
 const Password = ({
   id,
@@ -80,13 +85,17 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch}) => {
           </Row> 
         </Card.Header> <br/><br/>
         <Card.Body>
-          {passwords.map(ele => 
-            <Password 
-              {...ele} 
-              key={ele.id} 
-              handleEdit={handleEdit} 
-              handleDelete={handleDelete} />
-          )} 
+          {passwords.map(ele => {
+            const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
+            const password = bytes.toString(CryptoJS.enc.Utf8)
+            const passwordData = {...ele, password}
+            return <Password 
+                      {...passwordData} 
+                      key={ele.id} 
+                      handleEdit={handleEdit} 
+                      handleDelete={handleDelete} />
+            })
+          }
         </Card.Body>
       </Card>
   )
