@@ -23,7 +23,6 @@ const AppDashboard = () => {
       password.email,
       password.encryptedPassword,
       password.userId)
-    console.log(newPassword)
     setPasswords([newPassword, ...passwords])
     alert('New contact created successfully')
   }
@@ -33,7 +32,6 @@ const AppDashboard = () => {
     const getContacts = async () => {
       setIsPending(true)
       let passwordData = await getPasswordsByUserID(localStorage.getItem('userId'))
-      console.log(passwordData)
       setPasswords(passwordData)
     }
     getContacts()
@@ -58,15 +56,12 @@ const AppDashboard = () => {
         updateSearch={updateSearch}
         passwords={passwords}
         handleEdit={async payload => {
-          // create an edit Modal
-          console.log(payload)
-            let data = await updatePassword({
+            await updatePassword({
               accountName: payload.accountName,
               accountUrl: payload.accountUrl,
               email: payload.email,
               encryptedPassword: payload.password
             }, payload.id)
-            console.log(data)
             setPasswords(passwords.map( password => password.id === payload.id? payload : password))
         }}
         handleDelete={async id => {

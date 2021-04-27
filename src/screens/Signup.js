@@ -26,7 +26,6 @@ export default function SignIn() {
       email: email.current.value,
       password: password.current.value
     }
-    console.log(body)
     if (body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value) {
       const user = await createUser(body.firstName, body.lastName, body.email, body.password)
       if (!user) {
@@ -42,8 +41,6 @@ export default function SignIn() {
     } else {
       alert('Password and confirm password fields must be equal')
     }
-
-    console.log(body)
   }
   
   return (

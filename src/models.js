@@ -8,7 +8,6 @@ const client = new faunadb.Client({secret: process.env.REACT_APP_FAUNA_KEY})
 
 export  const createUser = async (firstName, lastName, email, password) => {
   password = await bcrypt.hash(password, bcrypt.genSaltSync(10))
-  console.log(password)
   let newUser = await client.query(
     q.Create(
       q.Collection('users'),
@@ -54,7 +53,6 @@ export const loginUser = async (email, password) => {
 
 export const createPassword = async (accountName, accountUrl, email, encryptedPassword, userId) => {
   let user = await getUser(userId)
-  console.log(user)
   const date = new Date()
   const months = [
     "January", "February", "March", "April", "May", "June",
@@ -91,15 +89,12 @@ export const getPasswordsByUserID = async id => {
         q.Match(q.Index('user_passwords'), id)
       )
     )
-    console.log(userPasswords )
     if (userPasswords.name === "NotFound") return
     if (userPasswords.name === "BadRequest") return "Something went wrong"
     for (let passwordId of userPasswords.data) {
-      console.log(passwordId)
       let password = await getPassword(passwordId.value.id)
       passwords.push(password)
     }
-    console.log(passwords)
     return passwords
   } catch (error) {
     
@@ -147,6 +142,5 @@ export const filterPassword = async search => {
     q.Paginate(q.Match(q.Index('tasks_name_and_ref'))),
     q.Lambda(['name', 'ref'], q.ContainsStr(q.LowerCase(q.Var('name')), search))
   )
-  console.log(searchResult)
   return searchResult
 }

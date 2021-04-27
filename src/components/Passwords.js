@@ -73,7 +73,6 @@ const Password = ({
 
 const Passwords = ({passwords, handleEdit, handleDelete, updateSearch}) => {
   const [search, setSearch] = useState('')
-  console.log(search)
   return (
       <Card border="dark" style={{margin: ' 5em 10em', padding: '20px', border: '1px solid black'}}> 
         <Card.Header>

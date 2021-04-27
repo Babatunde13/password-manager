@@ -27,7 +27,6 @@ export default function SignIn() {
       setValidated(true)
     } else {
       const user = await loginUser(body.email, body.password)
-      console.log(user)
       if (user) {
         localStorage.setItem('userId', user.id)
         localStorage.setItem('email', user.email)

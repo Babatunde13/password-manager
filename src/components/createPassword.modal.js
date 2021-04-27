@@ -21,10 +21,7 @@ const CreatePasswordModal = (props)  => {
   const [password, setPassword] = useState('') 
 
   const handleCreate = async () => {
-    console.log(password)
-    console.log(process.env.REACT_APP_SECRET_KEY)
     const encryptedPassword = CryptoJS.AES.encrypt(password, process.env.REACT_APP_SECRET_KEY).toString()
-    console.log(encryptedPassword)
     const payload = {
       accountName, 
       accountUrl,
