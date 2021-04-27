@@ -40,13 +40,12 @@ const Password = ({
 
   return (
       <ListGroup>
-        <Button style={{backgroundColor: "white", color: 'black', border: '0px solid gray'}} onClick={previewPassword}>
+        <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px'}} onClick={previewPassword}>
           <span>
-            <img style={{paddingLeft: '1', marginLeft: '1', border: '1px solid dashed'}} src={web} alt="" />
+            <img style={{paddingLeft: '1', marginLeft: '1'}} src={web} alt="" />
             <span>{accountName}</span>
           </span>
         </Button>
-        <hr/>
         <PreviewPasswordModal
           id={id}
           show={previewModal}
@@ -67,14 +66,16 @@ const Password = ({
 }
 
 
-const Passwords = ({passwords, handleEdit, handleDelete}) => {
+const Passwords = ({passwords, handleEdit, handleDelete, updateSearch}) => {
+  const [search, setSearch] = useState('')
+  console.log(search)
   return (
       <Card border="dark" style={{margin: ' 5em 10em', padding: '20px', border: '1px solid black'}}> 
         <Card.Header>
          <Row style={{display: 'flex', justifyContent: 'space-between'}}>
           {passwords.length} Sites and Apps
-            <Form inline>
-              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onKeyDown={() => {}}/>
+            <Form inline onSubmit={(e) => {e.preventDefault()}}>
+              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
             </Form>
           </Row> 
         </Card.Header> <br/><br/>

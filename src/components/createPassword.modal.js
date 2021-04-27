@@ -56,7 +56,7 @@ const CreatePasswordModal = (props)  => {
                 <Form.Control placeholder="Account Name" value={accountName} onChange={(e) => setAccountName(e.target.value)}/>
               </Form.Group>
               <Form.Group as={Col}>
-                <Form.Control placeholder="Account URL" value={accountUrl} onChange={(e) => setAccountUrl(e.target.value)}/>
+                <Form.Control placeholder="Account URL" defaultValue={`https://${accountUrl}`} onChange={(e) => setAccountUrl(e.target.value)}/>
               </Form.Group>
             </Row>
             <Row>

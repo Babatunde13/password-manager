@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 import Card from "react-bootstrap/Card";
-import { getPasswordsByUserID, createPassword, deletePassword, updatePassword } from "../models";
+import { 
+  getPasswordsByUserID, 
+  createPassword, 
+  deletePassword, 
+  updatePassword,
+  filterPassword } from "../models";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
@@ -15,6 +20,7 @@ const AppDashboard = () => {
     const newPassword = await createPassword(
       password.accountName, 
       password.accountUrl,
+      password.email,
       password.password,
       password.userId)
     console.log(newPassword)
@@ -34,6 +40,10 @@ const AppDashboard = () => {
     setIsPending(false)
   }, [])
 
+  const updateSearch = (search) => {
+    filterPassword(search) 
+  }
+
   return (
    <>
       <NavbarComponent 
@@ -45,6 +55,7 @@ const AppDashboard = () => {
       </Card>
       {isPending ? <Card>Fetching Passwords...</Card> :
       <Passwords 
+        updateSearch={updateSearch}
         passwords={passwords}
         handleEdit={async payload => {
           // create an edit Modal

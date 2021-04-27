@@ -33,8 +33,8 @@ const PreviewPasswordModal = props  => {
               <div><FormControl type="text" style={{width: '18em', padding: '20px', margin: '5px'}} value={props.email} readOnly/></div>
               <div>
                 <FormControl type={passwordType} style={{width: '18em', padding: '20px', margin: '5px'}} value={props.password} readOnly/>
-                <Button onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>{passwordType === "password"? "Preview Password": "Hide"}</Button>
-                <Button onClick={() => {
+                <Button className="m-1" onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>{passwordType === "password"? "Preview Password": "Hide"}</Button>
+                <Button className="m-1" onClick={() => {
                   var passwordText = document.createElement('textarea')
                   passwordText.innerText = props.password
                   document.body.appendChild(passwordText)

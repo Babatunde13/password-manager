@@ -141,3 +141,12 @@ export const deletePassword = async id => {
   password.data.id = password.ref.value.id
   return password.data
 }
+
+export const filterPassword = async search => {
+  const searchResult = await q.Filter(
+    q.Paginate(q.Match(q.Index('tasks_name_and_ref'))),
+    q.Lambda(['name', 'ref'], q.ContainsStr(q.LowerCase(q.Var('name')), search))
+  )
+  console.log(searchResult)
+  return searchResult
+}
