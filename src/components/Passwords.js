@@ -84,16 +84,18 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch}) => {
           </Row> 
         </Card.Header> <br/><br/>
         <Card.Body>
-          {passwords.map(ele => {
-            const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
-            const password = bytes.toString(CryptoJS.enc.Utf8)
-            const passwordData = {...ele, password}
-            return <Password 
-                      {...passwordData} 
-                      key={ele.id} 
-                      handleEdit={handleEdit} 
-                      handleDelete={handleDelete} />
-            })
+          {passwords.length > 0? 
+            passwords.map(ele => {
+              const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
+              const password = bytes.toString(CryptoJS.enc.Utf8)
+              const passwordData = {...ele, password}
+              return <Password 
+                        {...passwordData} 
+                        key={ele.id} 
+                        handleEdit={handleEdit} 
+                        handleDelete={handleDelete} />
+              }) :
+              "You haven't created any passwords"
           }
         </Card.Body>
       </Card>
