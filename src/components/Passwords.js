@@ -1,6 +1,5 @@
 import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
-import ListGroup from "react-bootstrap/ListGroup";
+import Container from 'react-bootstrap/Container'
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import FormControl from "react-bootstrap/FormControl";
@@ -10,6 +9,7 @@ import dotenv from 'dotenv'
 import { useState } from 'react'
 import PreviewPasswordModal from './previewPassword.modal'
 import web from '../assets/web.png';
+import { Col } from 'react-bootstrap';
 
 
 dotenv.config()
@@ -44,13 +44,13 @@ const Password = ({
   }
 
   return (
-      <ListGroup>
-        <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px'}} onClick={previewPassword}>
-          <span>
-            <img style={{paddingLeft: '1', marginLeft: '1'}} src={web} alt="" />
-            <span>{accountName}</span>
-          </span>
-        </Button>
+      <Row>
+          <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px'}} onClick={previewPassword}>
+            <span>
+              <Col sm={4}><img style={{paddingLeft: '1', marginLeft: '1'}} src={web} alt="" /></Col>
+              <Col sm={8}><span>{accountName}</span></Col>
+            </span>
+          </Button>
         <PreviewPasswordModal
           id={id}
           show={previewModal}
@@ -66,7 +66,7 @@ const Password = ({
           title={"Preview Password for "+title_}
           onHide={() => {setpreviewModal(false)}}
         />
-      </ListGroup>
+      </Row>
   )
 }
 
@@ -74,31 +74,33 @@ const Password = ({
 const Passwords = ({passwords, handleEdit, handleDelete, updateSearch}) => {
   const [search, setSearch] = useState('')
   return (
-      <Card border="dark" style={{margin: ' 5em 10em', padding: '20px', border: '1px solid black'}}> 
-        <Card.Header>
-         <Row style={{display: 'flex', justifyContent: 'space-between'}}>
-          {passwords.length} Sites and Apps
-            <Form inline onSubmit={(e) => {e.preventDefault()}}>
-              <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
-            </Form>
+      <Container border="dark" style={{margin: '5em 8em', padding: '20px', border: '1px solid black'}}> 
+        <Row className="">
+         <Row className="justify-content-between">
+          <Col sm={5}>{passwords.length} Sites and Apps</Col>
+            <Col sm={7} >
+              <Form inline onSubmit={(e) => {e.preventDefault()}}>
+                <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
+              </Form>
+            </Col>
           </Row> 
-        </Card.Header> <br/><br/>
-        <Card.Body>
+        </Row> <br/><br/>
+        <Row>
           {passwords.length > 0? 
             passwords.map(ele => {
               const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
               const password = bytes.toString(CryptoJS.enc.Utf8)
               const passwordData = {...ele, password}
               return <Password 
-                        {...passwordData} 
+                        {...passwordData}
                         key={ele.id} 
                         handleEdit={handleEdit} 
                         handleDelete={handleDelete} />
               }) :
               "You haven't created any passwords"
           }
-        </Card.Body>
-      </Card>
+        </Row>
+      </Container>
   )
 }
 
