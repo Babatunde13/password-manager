@@ -2,7 +2,7 @@ import {useState} from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import CreatePasswordModal from '../components/createPassword.modal'
 import favicon from '../assets/favicon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,30 +21,40 @@ const NavbarComponent = (props) => {
   }
 
   return (
-    <Navbar bg="light" expand="lg" className="mb-5">
-    {/* <Navbar bg="light" expand="lg" style={{ width: 400 }}> */}
-      <Navbar.Brand onClick={() => {window.location.assign("/")}} style={{cursor : 'pointer'}}><img src={favicon} alt="" style={{width : '40px', height :  '40px'}}></img> Password Manager</Navbar.Brand>
+    <Navbar 
+      expand="lg" 
+      className="navbar-fixed-top" 
+      style={{position : "sticky", top : "0", zIndex: "10000", backgroundColor : "#d1e1f0e7"}}
+    >
+      <Navbar.Brand 
+        as={Link} to="/" 
+        style={{cursor : 'pointer'}}>
+          <img src={favicon} alt="" style={{width : '40px', height :  '40px'}} /> 
+          Password Manager
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          {/* <Nav.Link href="#link">Link</Nav.Link> */}
+          <Link to="/" className="mt-2" style={{textDecoration : "none"}}>Home</Link>
           
           {!localStorage.getItem('userId')  ? 
           <>
-          <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg" />} alignRight id="basic-nav-dropdown">
-            <NavDropdown.Item href="/login">Sign in</NavDropdown.Item>
-            <NavDropdown.Item href="/register">Register</NavDropdown.Item>
+          <NavDropdown 
+            title={<FontAwesomeIcon 
+            icon={faUserCircle} 
+            size="2x" 
+            className="text-primary" />} alignRight id="basic-nav-dropdown">
+            <NavDropdown.Item as={Link} to="/login" className="text-primary">Sign in</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/register" className="text-primary">Register</NavDropdown.Item>
           </NavDropdown>
           </>: 
           <>
-          <NavDropdown title={<FontAwesomeIcon icon={faCog} size="lg" />} alignRight id="basic-nav-dropdown">
-            <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
+          <NavDropdown title={<FontAwesomeIcon icon={faCog} size="2x" className="text-primary" />} alignRight id="basic-nav-dropdown">
+            <NavDropdown.Item as={Link} to="/dashboard" className="text-primary" >Dashboard</NavDropdown.Item>
             <CreatePasswordModal show={createModalShow} onHide={handleHide} handleCreate={ handleCreate } />
-            <NavDropdown.Item href="#" onClick={() => setCreateModalShow(true)}>Create New Password</NavDropdown.Item>
+            <NavDropdown.Item to="#" onClick={() => setCreateModalShow(true)} className="text-primary" >Create New Password</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="/logout"
-                onClick={() => {localStorage.clear(); window.location.assign('/')}}>Logout</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/logout" className="text-primary" >Logout</NavDropdown.Item>
           </NavDropdown>
           </>
           }

@@ -49,9 +49,9 @@ export default function SignIn() {
   
   return (
     <>
-      <NavbarComponent />
+      <NavbarComponent /> <br/><br/>
       <Container className='d-flex flex-column align-items-center justify-content-center pt-5' style={{height : '80vh'}}>
-        <p className="h3 display-4 mt-5"><FontAwesomeIcon icon={faUserCircle} size="lg" /></p>
+        <p className="h3 display-4 mt-5"><FontAwesomeIcon icon={faUserCircle} size="1x" /></p>
         <p className="h2 display-5">Register</p>
         <Form noValidate validated={validated} onSubmit={handleSubmit} style={{minWidth : '300px' }}>
           <Form.Row>

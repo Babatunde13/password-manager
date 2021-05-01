@@ -35,6 +35,7 @@ export default function SignIn() {
         localStorage.setItem('userId', user.id)
         localStorage.setItem('email', user.email)
         history.push('/')
+        alert('Logged in successfully!')
       } else {
         alert('Invalid email or password')
       }
@@ -44,7 +45,7 @@ export default function SignIn() {
     <>
       <NavbarComponent />
       <Container className='d-flex flex-column align-items-center justify-content-center' style={{height : '80vh'}}>
-        <p className="h3 display-4"><FontAwesomeIcon icon={faUserCircle} size="lg" /></p>
+        <p className="h3 display-4"><FontAwesomeIcon icon={faUserCircle} size="1x" /></p>
         <p className="h2 display-5">Sign in</p>
         <Form noValidate validated={validated} onSubmit={handleSubmit} style={{minWidth : '300px' }}>
           <Form.Row>

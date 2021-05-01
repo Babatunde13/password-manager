@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Card from "react-bootstrap/Card";
 import { 
   getPasswordsByUserID, 
   createPassword, 
@@ -28,14 +27,16 @@ const AppDashboard = () => {
   }
 
   useEffect(() => {
+    setIsPending(true)
     const getContacts = async () => {
-      setIsPending(true)
       let passwordData = await getPasswordsByUserID(localStorage.getItem('userId'))
       setPasswords(passwordData)
     }
     getContacts()
-    setIsPending(false)
-  }, [isPending])
+    setTimeout(() => {
+      setIsPending(false)
+    }, 1000);
+  }, [])
 
   const updateSearch = (search) => {
     filterPassword(search) 
@@ -47,9 +48,6 @@ const AppDashboard = () => {
         passwords={ passwords} 
         handleCreate={ handleCreate }/>
 
-      <Card>
-
-      </Card>
       <Passwords 
         updateSearch={updateSearch}
         isPending={isPending}

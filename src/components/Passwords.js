@@ -2,14 +2,14 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import FormControl from "react-bootstrap/FormControl";
 import CryptoJS from "crypto-js";
 import dotenv from 'dotenv'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import PreviewPasswordModal from './previewPassword.modal'
 import web from '../assets/web.png';
 import { Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 
 dotenv.config()
@@ -43,12 +43,12 @@ const Password = ({
   }
 
   return (
-      <Row>
-          <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px'}} onClick={previewPassword}>
-            <span>
-              <Col sm={4}><img style={{paddingLeft: '1', marginLeft: '1'}} src={web} alt="" /></Col>
-              <Col sm={8}><span>{accountName}</span></Col>
-            </span>
+      <Col sm="12">
+          <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px', width: "100%"}} onClick={previewPassword}>
+            <Row>
+              <Col sm={1}><img src={web} alt="" /></Col>
+              <Col className="text-left mt-1">{accountName}</Col>
+            </Row>
           </Button>
         <PreviewPasswordModal
           id={id}
@@ -65,7 +65,7 @@ const Password = ({
           title={"Preview Password for "+title_}
           onHide={() => {setpreviewModal(false)}}
         />
-      </Row>
+      </Col>
   )
 }
 
@@ -73,29 +73,35 @@ const Password = ({
 const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending}) => {
   const [search, setSearch] = useState('')
   return (
-      <Container border="dark" style={{margin: '5em 8em', padding: '20px', border: '1px solid black'}}> 
-        <Row className="">
-         <Row className="justify-content-between">
-          <Col sm={5}>{passwords.length} Sites and Apps</Col>
-            <Col sm={7} >
-              <Form inline onSubmit={(e) => {e.preventDefault()}}>
-                <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
-              </Form>
-            </Col>
-          </Row> 
-        </Row> <br/><br/>
-        <Row>
-          {isPending ? 'Loading data...' :
-            passwords.length > 0? 
-              passwords.map(ele => {
-                const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
-                const password = bytes.toString(CryptoJS.enc.Utf8)
-                const passwordData = {...ele, password}
-                return <Password {...passwordData} key={ele.id} handleEdit={handleEdit} handleDelete={handleDelete} />
-                }) :
-                "You haven't created any passwords"
-          }
-        </Row>
+      <Container className="p-3 my-5 bordered"> 
+      {isPending ? 
+          <p className="my-5 py-5 h2 display-4 w-100" style={{textAlign : "center"}}>
+            <FontAwesomeIcon icon={faSpinner} spin />
+          </p>
+           :
+          <>
+            <Row className="p-2 text-white" style={{backgroundColor : "dodgerblue"}}>
+              <Col xs={12} sm={6} className="pt-2">{passwords ? passwords.length: 0} Sites and Apps</Col>
+              <Col xs={12} sm={6}>
+                <Form inline onSubmit={(e) => {e.preventDefault()}}>
+                  <input type="text" placeholder="Search Passwords" className="form-control ml-md-auto" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
+                </Form>
+              </Col>
+            </Row> 
+              <br/><br/>
+            <Row>
+              {passwords.length > 0? 
+                  passwords.map(ele => {
+                    const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
+                    const password = bytes.toString(CryptoJS.enc.Utf8)
+                    const passwordData = {...ele, password}
+                    return <Password {...passwordData} key={ele.id} handleEdit={handleEdit} handleDelete={handleDelete} />
+                    }) :
+                    <p className="my-5 py-5 h2 display-5 w-100" style={{textAlign : "center"}}>You haven't created any passwords</p>
+              }
+            </Row>
+          </>
+        }
       </Container>
   )
 }
