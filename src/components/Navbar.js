@@ -29,7 +29,7 @@ const NavbarComponent = (props) => {
       <Navbar.Brand 
         as={Link} to="/" 
         style={{cursor : 'pointer'}}>
-          <img src={favicon} alt="" style={{width : '40px', height :  '40px'}} /> 
+          <img src={favicon} alt="" style={{width : '40px', height :  '40px'}} className="mr-2" /> 
           Password Manager
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
