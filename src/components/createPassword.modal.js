@@ -35,11 +35,7 @@ const CreatePasswordModal = props  => {
   }
 
   const onHide = () => {
-    setAccountName('')
-    setAccountUrl('')
-    setEmail('')
-    setPassword('')
-    props.onHide()
+    props.onHide(accountUrl, password, email, accountName)
   }
 
   return (
