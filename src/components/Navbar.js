@@ -10,8 +10,9 @@ import { faUserCircle, faCog } from '@fortawesome/free-solid-svg-icons'
 
 const NavbarComponent = (props) => {
   const [createModalShow, setCreateModalShow] = useState(false);
-  const handleHide = () => {
-    let n = window.confirm("Your changes won't be saved...")
+  const handleHide = (url, password, email, name) => {
+    let n = true
+    if (url || password || email || name) {n = window.confirm("Your changes won't be saved...")}
     if (n) setCreateModalShow(false)
   }
 
