@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import { Link } from 'react-router-dom'
 import CreatePasswordModal from '../components/createPassword.modal'
 
@@ -18,44 +18,39 @@ const NavbarComponent = (props) => {
   }
 
   return (
-    <Navbar collapseOnSelect className="justify-content-between" expand="sm" bg="primary" variant="pill">
-      <Navbar.Brand>
-        <Button onClick={() => {window.location.assign("/")}} style={{listStyle: 'none', color: 'white'}}>Home</Button>
-      </Navbar.Brand>
-      <Nav className="justify-content-end" activeKey="/home">
-        {!localStorage.getItem('userId')  ? 
+    <Navbar bg="light" expand="lg">
+    {/* <Navbar bg="light" expand="lg" style={{ width: 400 }}> */}
+      <Navbar.Brand onClick={() => {window.location.assign("/")}} style={{cursor : 'pointer'}}>Password Manager</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="#link">Link</Nav.Link>
+          
+          {!localStorage.getItem('userId')  ? 
           <>
-            <Nav.Item style={{padding: '15px'}}>
-              <Link to="/login" style={{listStyleType: 'none', color: 'white'}}>Login</Link>
-            </Nav.Item>
-            <Nav.Item style={{padding: '15px'}}>
-              <Link to="/register" style={{listStyleType: 'none', color: 'white'}}>Register</Link>
-            </Nav.Item>
-          </> : 
+          <NavDropdown title="<>" alignRight flip id="basic-nav-dropdown">
+            <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+            <NavDropdown.Item href="/register">Register</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+          </NavDropdown>
+          </>: 
           <>
-            <CreatePasswordModal
-                show={createModalShow}
-                onHide={handleHide}
-                handleCreate={ handleCreate }
-              />
-            <Nav.Item style={{padding: '15px'}}>
-              <Nav.Link variant="primary" style={{listStyleType: 'none', color: 'white'}} onClick={() => setCreateModalShow(true)}>
-                Create New Password
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item style={{padding: '15px'}}>
-              <Link to="/dashboard" style={{listStyleType: 'none', color: 'white'}}>Dashboard</Link>
-            </Nav.Item>
-            <Nav.Item style={{padding: '15px'}}>
-              <Link to="/logout" 
-                style={{listStyleType: 'none', color: 'white'}}
-                onClick={() => {localStorage.clear(); window.location.assign('/')}}>Logout</Link>
-            </Nav.Item>
-        </>
-        }
+          <NavDropdown title="Dropdown" alignRight flip id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+          </NavDropdown>
+          </>
+          }
         </Nav>
-      </Navbar>
+      </Navbar.Collapse>
+    </Navbar>
   )
 }
 
 export default NavbarComponent
+
