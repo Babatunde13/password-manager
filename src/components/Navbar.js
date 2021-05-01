@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 // import { Link } from 'react-router-dom'
 import CreatePasswordModal from '../components/createPassword.modal'
+import favicon from '../assets/favicon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle, faCog } from '@fortawesome/free-solid-svg-icons'
 
@@ -22,7 +23,7 @@ const NavbarComponent = (props) => {
   return (
     <Navbar bg="light" expand="lg">
     {/* <Navbar bg="light" expand="lg" style={{ width: 400 }}> */}
-      <Navbar.Brand onClick={() => {window.location.assign("/")}} style={{cursor : 'pointer'}}>Password Manager</Navbar.Brand>
+      <Navbar.Brand onClick={() => {window.location.assign("/")}} style={{cursor : 'pointer'}}><img src={favicon} style={{width : '40px', height :  '40px'}}></img> Password Manager</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
