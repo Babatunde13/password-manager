@@ -63,6 +63,7 @@ export default function SignIn() {
             </Form.Group>
           </Form.Row>
           <Button type="submit">Sign in</Button>
+          <p className="text-center"><a href="/register">Register</a> to create account!</p>
         </Form>
       </Container>
     </>
