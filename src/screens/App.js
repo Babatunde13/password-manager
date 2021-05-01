@@ -28,7 +28,6 @@ const AppDashboard = () => {
   }
 
   useEffect(() => {
-    setIsPending(true)
     const getContacts = async () => {
       setIsPending(true)
       let passwordData = await getPasswordsByUserID(localStorage.getItem('userId'))
@@ -36,7 +35,7 @@ const AppDashboard = () => {
     }
     getContacts()
     setIsPending(false)
-  }, [])
+  }, [isPending])
 
   const updateSearch = (search) => {
     filterPassword(search) 
@@ -51,9 +50,9 @@ const AppDashboard = () => {
       <Card>
 
       </Card>
-      {isPending ? <Card>Fetching Passwords...</Card> :
       <Passwords 
         updateSearch={updateSearch}
+        isPending={isPending}
         passwords={passwords}
         handleEdit={async payload => {
             await updatePassword({
@@ -68,7 +67,7 @@ const AppDashboard = () => {
           await deletePassword(id)
           setPasswords(passwords.filter( ele =>  ele.id !== id)) 
         }}  
-      /> }
+      /> 
    </>
   );
 }
