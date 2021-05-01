@@ -18,7 +18,6 @@ const PreviewPasswordModal = props  => {
       centered
     >
       <Modal.Header closeButton>
-      <Button variant="danger" onClick={props.onHide}>Close</Button>
         <Modal.Title id="contained-modal-title-vcenter">
           <img src={web} alt=""/> {props.accountName}
         </Modal.Title>

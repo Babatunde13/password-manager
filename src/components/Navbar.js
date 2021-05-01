@@ -21,7 +21,7 @@ const NavbarComponent = (props) => {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg" className="navbar-fixed-top" style={{position : "sticky", top : "0", zIndex: "10000", backgroundColor : "silver"}}>
     {/* <Navbar bg="light" expand="lg" style={{ width: 400 }}> */}
       <Navbar.Brand as={Link} to="/" style={{cursor : 'pointer'}}><img src={favicon} alt="" style={{width : '40px', height :  '40px'}}></img> Password Manager</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

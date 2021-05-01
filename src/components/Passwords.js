@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import FormControl from "react-bootstrap/FormControl";
 import CryptoJS from "crypto-js";
 import dotenv from 'dotenv'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -73,16 +72,23 @@ const Password = ({
 const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending}) => {
   const [search, setSearch] = useState('')
   return (
-      <Container border="dark" style={{margin: '5em 8em', padding: '20px', border: '1px solid black'}}> 
-
-        <Row>
-          <Col sm={12} md={6}>{passwords.length} Sites and Apps</Col>
-          <Col sm={12} md={6}>
+      <Container className="p-3 my-5 bordered"> 
+        <Row className="p-2 text-white" style={{backgroundColor : "dodgerblue"}}>
+          <Col xs={12} sm={6} className="pt-2">{passwords.length} Sites and Apps</Col>
+          <Col xs={12} sm={6}>
             <Form inline onSubmit={(e) => {e.preventDefault()}}>
               <input type="text" placeholder="Search Passwords" className="form-control ml-md-auto" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
             </Form>
           </Col>
         </Row> 
+          <br/><br/>
+          <br/><br/>
+          <br/><br/>
+          <br/><br/>
+          <br/><br/>
+          <br/><br/>
+          <br/><br/>
+          <br/><br/>
           <br/><br/>
         <Row>
           {isPending ? 'Loading data...' :
