@@ -44,7 +44,7 @@ export default function SignIn() {
       <NavbarComponent />
       <Container className='d-flex flex-column align-items-center justify-content-center' style={{height : '80vh'}}>
         <p className="h3 display-4"><FontAwesomeIcon icon={faUserCircle} size="lg" /></p>
-        <p className="h2 display-5">Login</p>
+        <p className="h2 display-5">Sign in</p>
         <Form noValidate validated={validated} onSubmit={handleSubmit} style={{minWidth : '300px' }}>
           <Form.Row>
             <Form.Group as={Col} md="12" controlId="validationCustom01">
@@ -62,7 +62,7 @@ export default function SignIn() {
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
-          <Button type="submit">Sign In</Button>
+          <Button type="submit">Sign in</Button>
         </Form>
       </Container>
     </>

@@ -33,7 +33,7 @@ const NavbarComponent = (props) => {
           {!localStorage.getItem('userId')  ? 
           <>
           <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg" />} alignRight flip id="basic-nav-dropdown">
-            <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+            <NavDropdown.Item href="/login">Sign in</NavDropdown.Item>
             <NavDropdown.Item href="/register">Register</NavDropdown.Item>
           </NavDropdown>
           </>: 
