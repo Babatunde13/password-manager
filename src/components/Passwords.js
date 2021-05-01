@@ -23,7 +23,6 @@ const Password = ({
   handleDelete,
   handleEdit
 }) => {
-  // eslint-disable-next-line
   const [editModal, setEditModal] = useState(false)
   const [previewModal, setpreviewModal] = useState(false)
   const title_ = accountName || accountUrl
@@ -71,7 +70,7 @@ const Password = ({
 }
 
 
-const Passwords = ({passwords, handleEdit, handleDelete, updateSearch}) => {
+const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending}) => {
   const [search, setSearch] = useState('')
   return (
       <Container border="dark" style={{margin: '5em 8em', padding: '20px', border: '1px solid black'}}> 
@@ -86,18 +85,19 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch}) => {
           </Row> 
         </Row> <br/><br/>
         <Row>
-          {passwords.length > 0? 
-            passwords.map(ele => {
-              const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
-              const password = bytes.toString(CryptoJS.enc.Utf8)
-              const passwordData = {...ele, password}
-              return <Password 
-                        {...passwordData}
-                        key={ele.id} 
-                        handleEdit={handleEdit} 
-                        handleDelete={handleDelete} />
-              }) :
-              "You haven't created any passwords"
+          {isPending ? 'Loading data...' :
+            passwords.length > 0? 
+              passwords.map(ele => {
+                const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
+                const password = bytes.toString(CryptoJS.enc.Utf8)
+                const passwordData = {...ele, password}
+                return <Password 
+                          {...passwordData}
+                          key={ele.id} 
+                          handleEdit={handleEdit} 
+                          handleDelete={handleDelete} />
+                }) :
+                "You haven't created any passwords"
           }
         </Row>
       </Container>
