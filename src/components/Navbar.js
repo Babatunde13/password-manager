@@ -21,7 +21,7 @@ const NavbarComponent = (props) => {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="mb-5">
     {/* <Navbar bg="light" expand="lg" style={{ width: 400 }}> */}
       <Navbar.Brand onClick={() => {window.location.assign("/")}} style={{cursor : 'pointer'}}><img src={favicon} alt="" style={{width : '40px', height :  '40px'}}></img> Password Manager</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
