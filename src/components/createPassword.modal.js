@@ -13,7 +13,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const CreatePasswordModal = (props)  => {
+const CreatePasswordModal = props  => {
   const [accountName, setAccountName] = useState('')
   const [accountUrl, setAccountUrl] = useState('') 
   const [email, setEmail] = useState('')

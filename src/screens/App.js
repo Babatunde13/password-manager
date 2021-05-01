@@ -10,7 +10,7 @@ import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
 
 const AppDashboard = () => {
-  const [passwords, setPasswords] = useState(null)
+  const [passwords, setPasswords] = useState([])
   const [isPending, setIsPending] = useState(false)
 
   const handleCreate = async password => {
@@ -27,14 +27,16 @@ const AppDashboard = () => {
   }
 
   useEffect(() => {
+    setIsPending(true)
     const getContacts = async () => {
-      setIsPending(true)
       let passwordData = await getPasswordsByUserID(localStorage.getItem('userId'))
       setPasswords(passwordData)
     }
     getContacts()
-    setIsPending(false)
-  }, [isPending])
+    setTimeout(() => {
+      setIsPending(false)
+    }, 1000);
+  }, [])
 
   const updateSearch = (search) => {
     filterPassword(search) 
