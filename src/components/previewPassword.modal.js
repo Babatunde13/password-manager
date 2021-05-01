@@ -38,9 +38,9 @@ const PreviewPasswordModal = props  => {
                     style={{cursor : 'pointer'}} 
                     onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>
                     {passwordType === "password"? 
-                      <FontAwesomeIcon icon={faEye} size="md" className="align-bottom" /> 
+                      <FontAwesomeIcon icon={faEye} size="1x" className="align-bottom" /> 
                     : 
-                      <FontAwesomeIcon icon={faEyeSlash} size="md" className="align-bottom" /> }
+                      <FontAwesomeIcon icon={faEyeSlash} size="1x" className="align-bottom" /> }
                   </span>
                 </Col>
                 <Col xs={2} md={1} className="text-right">
@@ -54,7 +54,7 @@ const PreviewPasswordModal = props  => {
                     document.execCommand('copy')
                     passwordText.remove()
                   }}>
-                    <FontAwesomeIcon icon={faCopy} size="md" className="align-bottom" />
+                    <FontAwesomeIcon icon={faCopy} size="1x" className="align-bottom" />
                   </span>
                 </Col>
               </Row>
@@ -67,7 +67,7 @@ const PreviewPasswordModal = props  => {
           <FontAwesomeIcon icon={faEdit} size="md" className="" /> 
         </Button>
         <Button variant="danger" onClick={props.onDelete}>
-          <FontAwesomeIcon icon={faTrashAlt} size="md" className="" /> 
+          <FontAwesomeIcon icon={faTrashAlt} size="1x" className="" /> 
         </Button>
       </Modal.Footer>
       <EditPasswordModal

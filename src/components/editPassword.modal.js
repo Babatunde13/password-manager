@@ -71,33 +71,18 @@ const EditPasswordModal = props  => {
                     style={{cursor : 'pointer'}} 
                     onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>
                     {passwordType === "password"? 
-                      <FontAwesomeIcon icon={faEye} size="md" className="align-bottom" /> 
+                      <FontAwesomeIcon icon={faEye} size="1x" className="align-bottom" /> 
                     : 
-                      <FontAwesomeIcon icon={faEyeSlash} size="md" className="align-bottom" /> }
+                      <FontAwesomeIcon icon={faEyeSlash} size="1x" className="align-bottom" /> }
                   </span>
                 </Col>
               </Row>
-            {/* <Row>
-              <Form.Group as={Col}>
-                <Form.Control type={passwordType} value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <Col xs={2} md={1} className="text-left">
-                  <span
-                    style={{cursor : 'pointer'}} 
-                    onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>
-                    {passwordType === "password"? 
-                      <FontAwesomeIcon icon={faEye} size="md" className="align-bottom" /> 
-                    : 
-                      <FontAwesomeIcon icon={faEyeSlash} size="md" className="align-bottom" /> }
-                  </span>
-                </Col>
-              </Form.Group>
-            </Row> */}
           </Form>
         </Container>
       </Modal.Body>
     <Modal.Footer>
         <Button variant="success" onClick={onEdit} disabled={(!accountUrl || !accountName || !email) ? true : false}>          
-          <FontAwesomeIcon icon={faEdit} size="md" className="" /> Edit
+          <FontAwesomeIcon icon={faEdit} size="1x" className="" /> Edit
         </Button>
       </Modal.Footer>
     </Modal>

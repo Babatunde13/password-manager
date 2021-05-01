@@ -81,7 +81,7 @@ const CreatePasswordModal = props  => {
       </Modal.Body>
     <Modal.Footer>
         <Button variant="success" onClick={handleCreate} disabled={(!accountUrl || !accountName || !email) ? true : false}>
-          <FontAwesomeIcon icon={faPlus} size="md" className="" />
+          <FontAwesomeIcon icon={faPlus} size="1x" className="" />
         </Button>
       </Modal.Footer>
     </Modal>

@@ -90,7 +90,7 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending
             </Row> 
               <br/><br/>
             <Row>
-              {passwords? 
+              {passwords.length > 0? 
                   passwords.map(ele => {
                     const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
                     const password = bytes.toString(CryptoJS.enc.Utf8)

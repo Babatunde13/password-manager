@@ -21,9 +21,17 @@ const NavbarComponent = (props) => {
   }
 
   return (
-    <Navbar expand="lg" className="navbar-fixed-top" style={{position : "sticky", top : "0", zIndex: "10000", backgroundColor : "#d1e1f0e7"}}>
-    {/* <Navbar bg="light" expand="lg" style={{ width: 400 }}> */}
-      <Navbar.Brand as={Link} to="/" style={{cursor : 'pointer'}}><img src={favicon} alt="" style={{width : '40px', height :  '40px'}}></img> Password Manager</Navbar.Brand>
+    <Navbar 
+      expand="lg" 
+      className="navbar-fixed-top" 
+      style={{position : "sticky", top : "0", zIndex: "10000", backgroundColor : "#d1e1f0e7"}}
+    >
+      <Navbar.Brand 
+        as={Link} to="/" 
+        style={{cursor : 'pointer'}}>
+          <img src={favicon} alt="" style={{width : '40px', height :  '40px'}} /> 
+          Password Manager
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
@@ -31,13 +39,17 @@ const NavbarComponent = (props) => {
           
           {!localStorage.getItem('userId')  ? 
           <>
-          <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg" className="text-primary" />} alignRight id="basic-nav-dropdown">
+          <NavDropdown 
+            title={<FontAwesomeIcon 
+            icon={faUserCircle} 
+            size="2x" 
+            className="text-primary" />} alignRight id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/login" className="text-primary">Sign in</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/register" className="text-primary">Register</NavDropdown.Item>
           </NavDropdown>
           </>: 
           <>
-          <NavDropdown title={<FontAwesomeIcon icon={faCog} size="lg" className="text-primary" />} alignRight id="basic-nav-dropdown">
+          <NavDropdown title={<FontAwesomeIcon icon={faCog} size="2x" className="text-primary" />} alignRight id="basic-nav-dropdown">
             <NavDropdown.Item as={Link} to="/dashboard" className="text-primary" >Dashboard</NavDropdown.Item>
             <CreatePasswordModal show={createModalShow} onHide={handleHide} handleCreate={ handleCreate } />
             <NavDropdown.Item to="#" onClick={() => setCreateModalShow(true)} className="text-primary" >Create New Password</NavDropdown.Item>
