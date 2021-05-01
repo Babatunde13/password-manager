@@ -23,7 +23,7 @@ const NavbarComponent = (props) => {
   return (
     <Navbar bg="light" expand="lg">
     {/* <Navbar bg="light" expand="lg" style={{ width: 400 }}> */}
-      <Navbar.Brand onClick={() => {window.location.assign("/")}} style={{cursor : 'pointer'}}><img src={favicon} style={{width : '40px', height :  '40px'}}></img> Password Manager</Navbar.Brand>
+      <Navbar.Brand onClick={() => {window.location.assign("/")}} style={{cursor : 'pointer'}}><img src={favicon} alt="" style={{width : '40px', height :  '40px'}}></img> Password Manager</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
@@ -32,13 +32,13 @@ const NavbarComponent = (props) => {
           
           {!localStorage.getItem('userId')  ? 
           <>
-          <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg" />} alignRight flip id="basic-nav-dropdown">
+          <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg" />} alignRight id="basic-nav-dropdown">
             <NavDropdown.Item href="/login">Sign in</NavDropdown.Item>
             <NavDropdown.Item href="/register">Register</NavDropdown.Item>
           </NavDropdown>
           </>: 
           <>
-          <NavDropdown title={<FontAwesomeIcon icon={faCog} size="lg" />} alignRight flip id="basic-nav-dropdown">
+          <NavDropdown title={<FontAwesomeIcon icon={faCog} size="lg" />} alignRight id="basic-nav-dropdown">
             <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
             <CreatePasswordModal show={createModalShow} onHide={handleHide} handleCreate={ handleCreate } />
             <NavDropdown.Item href="#" onClick={() => setCreateModalShow(true)}>Create New Password</NavDropdown.Item>
