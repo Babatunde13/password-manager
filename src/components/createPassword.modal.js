@@ -6,9 +6,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CryptoJS from "crypto-js";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { fa } from '@fortawesome/free-brands-svg-icons'
-// import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import dotenv from 'dotenv'
 
@@ -51,7 +50,7 @@ const CreatePasswordModal = (props)  => {
       centered
       onHide={onHide}
     >
-      <Modal.Header closeButton>
+      <Modal.Header style={{backgroundColor : "#d1e1f0"}}  closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Create New Password
         </Modal.Title>
@@ -81,8 +80,9 @@ const CreatePasswordModal = (props)  => {
         </Container>
       </Modal.Body>
     <Modal.Footer>
-        <Button variant="danger" onClick={props.onHide}>Close</Button>
-        <Button variant="success" onClick={handleCreate} disabled={(!accountUrl || !accountName || !email) ? true : false}>Create</Button>
+        <Button variant="success" onClick={handleCreate} disabled={(!accountUrl || !accountName || !email) ? true : false}>
+          <FontAwesomeIcon icon={faPlus} size="md" className="" />
+        </Button>
       </Modal.Footer>
     </Modal>
   );

@@ -5,9 +5,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { fa } from '@fortawesome/free-brands-svg-icons'
-// import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash, faEdit} from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import CryptoJS from "crypto-js";
 import dotenv from 'dotenv'
@@ -19,6 +18,7 @@ const EditPasswordModal = props  => {
   const [accountUrl, setAccountUrl] = useState(props.accountUrl) 
   const [email, setEmail] = useState(props.email)
   const [password, setPassword] = useState(props.password) 
+  const [passwordType, setPasswordType] = useState('password')
   
 
   const onEdit = () => {
@@ -40,7 +40,7 @@ const EditPasswordModal = props  => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header style={{backgroundColor : "#d1e1f0"}} closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {props.title}
         </Modal.Title>
@@ -61,17 +61,44 @@ const EditPasswordModal = props  => {
                 <Form.Control type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
               </Form.Group>
             </Row>
-            <Row>
+
+            <Row className="my-1">
+                <Col>
+                  <Form.Control type={passwordType} value={password} onChange={(e) => setPassword(e.target.value)}/>
+                </Col>
+                <Col xs={2} className="text-center">
+                  <span 
+                    style={{cursor : 'pointer'}} 
+                    onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>
+                    {passwordType === "password"? 
+                      <FontAwesomeIcon icon={faEye} size="md" className="align-bottom" /> 
+                    : 
+                      <FontAwesomeIcon icon={faEyeSlash} size="md" className="align-bottom" /> }
+                  </span>
+                </Col>
+              </Row>
+            {/* <Row>
               <Form.Group as={Col}>
-                <Form.Control type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                <Form.Control type={passwordType} value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <Col xs={2} md={1} className="text-left">
+                  <span
+                    style={{cursor : 'pointer'}} 
+                    onClick={() => {setPasswordType(passwordType === "password"? "text" : "password")}}>
+                    {passwordType === "password"? 
+                      <FontAwesomeIcon icon={faEye} size="md" className="align-bottom" /> 
+                    : 
+                      <FontAwesomeIcon icon={faEyeSlash} size="md" className="align-bottom" /> }
+                  </span>
+                </Col>
               </Form.Group>
-            </Row>
+            </Row> */}
           </Form>
         </Container>
       </Modal.Body>
     <Modal.Footer>
-        <Button variant="danger" onClick={props.onHide}>Close</Button>
-        <Button variant="success" onClick={onEdit} disabled={(!accountUrl || !accountName || !email) ? true : false}>Edit</Button>
+        <Button variant="success" onClick={onEdit} disabled={(!accountUrl || !accountName || !email) ? true : false}>          
+          <FontAwesomeIcon icon={faEdit} size="md" className="" /> Edit
+        </Button>
       </Modal.Footer>
     </Modal>
   );

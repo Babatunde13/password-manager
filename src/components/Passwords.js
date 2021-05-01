@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import CryptoJS from "crypto-js";
 import dotenv from 'dotenv'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import PreviewPasswordModal from './previewPassword.modal'
 import web from '../assets/web.png';
@@ -45,8 +44,8 @@ const Password = ({
       <Col sm="12">
           <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px', width: "100%"}} onClick={previewPassword}>
             <Row>
-              <Col sm={1}><img style={{paddingLeft: '1', marginLeft: '1'}} src={web} alt="" /></Col>
-              <Col><span>{accountName}</span></Col>
+              <Col sm={1}><img src={web} alt="" /></Col>
+              <Col className="text-left mt-1">{accountName}</Col>
             </Row>
           </Button>
         <PreviewPasswordModal
@@ -74,7 +73,7 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending
   return (
       <Container className="p-3 my-5 bordered"> 
         <Row className="p-2 text-white" style={{backgroundColor : "dodgerblue"}}>
-          <Col xs={12} sm={6} className="pt-2">{passwords.length} Sites and Apps</Col>
+          <Col xs={12} sm={6} className="pt-2">{passwords && passwords.length} Sites and Apps</Col>
           <Col xs={12} sm={6}>
             <Form inline onSubmit={(e) => {e.preventDefault()}}>
               <input type="text" placeholder="Search Passwords" className="form-control ml-md-auto" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
@@ -82,17 +81,9 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending
           </Col>
         </Row> 
           <br/><br/>
-          <br/><br/>
-          <br/><br/>
-          <br/><br/>
-          <br/><br/>
-          <br/><br/>
-          <br/><br/>
-          <br/><br/>
-          <br/><br/>
         <Row>
           {isPending ? 'Loading data...' :
-            passwords.length > 0? 
+           passwords.length > 0? 
               passwords.map(ele => {
                 const bytes = CryptoJS.AES.decrypt(ele.encryptedPassword, process.env.REACT_APP_SECRET_KEY);
                 const password = bytes.toString(CryptoJS.enc.Utf8)

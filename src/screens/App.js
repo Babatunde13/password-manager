@@ -10,7 +10,7 @@ import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
 
 const AppDashboard = () => {
-  const [passwords, setPasswords] = useState([])
+  const [passwords, setPasswords] = useState(null)
   const [isPending, setIsPending] = useState(false)
 
   const handleCreate = async password => {
