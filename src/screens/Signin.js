@@ -4,7 +4,10 @@ import {loginUser} from '../models'
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import NavbarComponent from '../components/Navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default function SignIn() {
   const history = useHistory()
@@ -39,35 +42,29 @@ export default function SignIn() {
   return (
     <>
       <NavbarComponent />
-      <Form noValidate validated={validated} onSubmit={handleSubmit} style={{margin: 'auto'}}>
-        <Form.Row>
-          <Form.Group as={Col} md="6" controlId="validationCustom01">
-            <Form.Label>First name</Form.Label>
-            <Form.Control
-              required
-              ref={email}
-              type="email"
-              placeholder="Email"
-            />
-            <Form.Control.Feedback type="invalid">Please provide a valid email.</Form.Control.Feedback>
-            <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
-          </Form.Group>
-        </Form.Row>
-        <Form.Row>
-          <Form.Group as={Col} md="6" controlId="validationCustom02">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              ref={password}
-              type="password"
-              placeholder="Password"
-            />
-            <Form.Control.Feedback type="invalid">Please provide a password.</Form.Control.Feedback>
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-          </Form.Group>
-        </Form.Row>
-        <Button type="submit">Sign In</Button>
-      </Form>
+      <Container className='d-flex flex-column align-items-center justify-content-center' style={{height : '80vh'}}>
+        <p className="h3 display-4"><FontAwesomeIcon icon={faUserCircle} size="lg" /></p>
+        <p className="h2 display-5">Login</p>
+        <Form noValidate validated={validated} onSubmit={handleSubmit} style={{minWidth : '300px' }}>
+          <Form.Row>
+            <Form.Group as={Col} md="12" controlId="validationCustom01">
+              <Form.Label>Email</Form.Label>
+              <Form.Control required ref={email} type="email" placeholder="Email" />
+              <Form.Control.Feedback type="invalid">Please provide a valid email.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Form.Group as={Col} md="12" controlId="validationCustom02">
+              <Form.Label>Password</Form.Label>
+              <Form.Control required ref={password} type="password" placeholder="Password" />
+              <Form.Control.Feedback type="invalid">Please provide a password.</Form.Control.Feedback>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+          </Form.Row>
+          <Button type="submit">Sign In</Button>
+        </Form>
+      </Container>
     </>
   )
 }
