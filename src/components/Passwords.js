@@ -43,12 +43,12 @@ const Password = ({
   }
 
   return (
-      <Row>
-          <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px'}} onClick={previewPassword}>
-            <span>
-              <Col sm={4}><img style={{paddingLeft: '1', marginLeft: '1'}} src={web} alt="" /></Col>
-              <Col sm={8}><span>{accountName}</span></Col>
-            </span>
+      <Col sm="12">
+          <Button style={{backgroundColor: "white", color: 'black', margin: '5px 0px', width: "100%"}} onClick={previewPassword}>
+            <Row>
+              <Col sm={1}><img style={{paddingLeft: '1', marginLeft: '1'}} src={web} alt="" /></Col>
+              <Col><span>{accountName}</span></Col>
+            </Row>
           </Button>
         <PreviewPasswordModal
           id={id}
@@ -65,7 +65,7 @@ const Password = ({
           title={"Preview Password for "+title_}
           onHide={() => {setpreviewModal(false)}}
         />
-      </Row>
+      </Col>
   )
 }
 
@@ -74,16 +74,16 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending
   const [search, setSearch] = useState('')
   return (
       <Container border="dark" style={{margin: '5em 8em', padding: '20px', border: '1px solid black'}}> 
-        <Row className="">
-         <Row className="justify-content-between">
-          <Col sm={5}>{passwords.length} Sites and Apps</Col>
-            <Col sm={7} >
-              <Form inline onSubmit={(e) => {e.preventDefault()}}>
-                <FormControl type="text" placeholder="Search Passwords" className="mr-sm-2 lg" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
-              </Form>
-            </Col>
-          </Row> 
-        </Row> <br/><br/>
+
+        <Row>
+          <Col sm={12} md={6}>{passwords.length} Sites and Apps</Col>
+          <Col sm={12} md={6}>
+            <Form inline onSubmit={(e) => {e.preventDefault()}}>
+              <input type="text" placeholder="Search Passwords" className="form-control ml-md-auto" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
+            </Form>
+          </Col>
+        </Row> 
+          <br/><br/>
         <Row>
           {isPending ? 'Loading data...' :
             passwords.length > 0? 

@@ -47,9 +47,6 @@ const AppDashboard = () => {
         passwords={ passwords} 
         handleCreate={ handleCreate }/>
 
-      <Card>
-
-      </Card>
       <Passwords 
         updateSearch={updateSearch}
         isPending={isPending}
