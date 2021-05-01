@@ -2,6 +2,7 @@ import {useRef, useState} from 'react'
 import { createUser } from '../models';
 import {useHistory} from 'react-router-dom'
 import Form from "react-bootstrap/Form";
+import { Link } from 'react-router-dom'
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -117,7 +118,7 @@ export default function SignIn() {
             />
           </Form.Group>
           <Button type="submit">Register</Button>
-          <p className="text-center"><a href="/login">Sign in</a> if already registered!</p>
+          <p className="text-center"><Link to="/login">Sign in</Link> if already registered!</p>
         </Form>
       </Container>
     </>

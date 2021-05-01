@@ -4,6 +4,7 @@ import {loginUser} from '../models'
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { Link } from 'react-router-dom'
 import Container from "react-bootstrap/Container";
 import NavbarComponent from '../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -63,7 +64,7 @@ export default function SignIn() {
             </Form.Group>
           </Form.Row>
           <Button type="submit">Sign in</Button>
-          <p className="text-center"><a href="/register">Register</a> to create account!</p>
+          <p className="text-center"><Link to="/register">Register</Link> to create account!</p>
         </Form>
       </Container>
     </>

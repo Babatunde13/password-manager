@@ -30,7 +30,7 @@ const NavbarComponent = (props) => {
           <Nav.Link href="/">Home</Nav.Link>
           {/* <Nav.Link href="#link">Link</Nav.Link> */}
           
-          {!localStorage.getItem('userId')  ? 
+          {localStorage.getItem('userId')  ? 
           <>
           <NavDropdown title={<FontAwesomeIcon icon={faUserCircle} size="lg" />} alignRight id="basic-nav-dropdown">
             <NavDropdown.Item href="/login">Sign in</NavDropdown.Item>
