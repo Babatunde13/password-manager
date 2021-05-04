@@ -84,7 +84,7 @@ const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending
               <Col xs={12} sm={6} className="pt-2">{passwords ? passwords.length: 0} Sites and Apps</Col>
               <Col xs={12} sm={6}>
                 <Form inline onSubmit={(e) => {e.preventDefault()}}>
-                  <input type="text" placeholder="Search Passwords" className="form-control ml-md-auto" onChange={(e) => {setSearch(e.target.value); updateSearch(search)}}/>
+                  <input type="text" placeholder="Search Passwords" className="form-control ml-md-auto" onChange={(e)=> {e.preventDefault()}} />
                 </Form>
               </Col>
             </Row> 

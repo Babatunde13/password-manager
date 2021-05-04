@@ -38,10 +38,6 @@ const AppDashboard = () => {
     }, 1000);
   }, [])
 
-  const updateSearch = (search) => {
-    filterPassword(search) 
-  }
-
   return (
    <>
       <NavbarComponent 
@@ -49,7 +45,6 @@ const AppDashboard = () => {
         handleCreate={ handleCreate }/>
 
       <Passwords 
-        updateSearch={updateSearch}
         isPending={isPending}
         passwords={passwords}
         handleEdit={async payload => {
