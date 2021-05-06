@@ -11,7 +11,7 @@ import { useHistory } from 'react-router';
 
 const AppDashboard = () => {
   const history = useHistory()
-  !localStorage.getItem('user') && history.push('/login')
+  !localStorage.getItem('userId') && history.push('/login')
   const [passwords, setPasswords] = useState([])
   const [isPending, setIsPending] = useState(false)
 

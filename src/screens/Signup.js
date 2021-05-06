@@ -12,7 +12,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default function SignIn() {
   const history = useHistory()
-  if (localStorage.getItem('user')) {
+  if (localStorage.getItem('userId')) {
     history.push('/')
   }
   const firstName= useRef('')
