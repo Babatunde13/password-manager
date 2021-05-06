@@ -63,7 +63,7 @@ export default function SignIn() {
                 type="text"
                 placeholder="First name"
               />
-              <Form.Control.Feedback type="invalid">Please provide an email.</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">Please provide your first name.</Form.Control.Feedback>
               <Form.Control.Feedback>Great name!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="6" controlId="validationCustom02">
