@@ -1,6 +1,6 @@
 {
-  "short_name": "Google Contact",
-  "name": "Contact Manager",
+  "short_name": "Password Manager",
+  "name": "Password Manager",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +8,18 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "favicon_192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "favicon_512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": ".",                                                                                                                                                                                                                                                         
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#5196cd",
+  "background_color": "#2196f3"
 }
