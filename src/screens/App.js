@@ -3,13 +3,15 @@ import {
   getPasswordsByUserID, 
   createPassword, 
   deletePassword, 
-  updatePassword,
-  filterPassword } from "../models";
+  updatePassword } from "../models";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
+import { useHistory } from 'react-router';
 
 const AppDashboard = () => {
+  const history = useHistory()
+  !localStorage.getItem('user') && history.push('/login')
   const [passwords, setPasswords] = useState([])
   const [isPending, setIsPending] = useState(false)
 

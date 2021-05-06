@@ -10,8 +10,6 @@ import web from '../assets/web.png';
 import { Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import { useHistory } from 'react-router';
-
 
 dotenv.config()
 
@@ -72,9 +70,6 @@ const Password = ({
 
 
 const Passwords = ({passwords, handleEdit, handleDelete, updateSearch, isPending}) => {
-  const history = useHistory()
-  !localStorage.getItem('user') && history.pushState('/login')
-  const [search, setSearch] = useState('')
   return (
       <Container className="p-3 my-5 bordered"> 
       {isPending ? 
