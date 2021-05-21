@@ -18,7 +18,7 @@ export default function SignIn() {
       window.flash('You are logged in', 'warning')
     }, 100)
     history.push('/') 
-    }
+  }
   const [validated, setValidated] = useState(false);
 
   const email = useRef('')

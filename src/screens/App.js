@@ -8,10 +8,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
 import { useHistory } from 'react-router';
+import { Flash } from '../components/Flash/flash';
 
 const AppDashboard = () => {
   const history = useHistory()
-  !localStorage.getItem('userId') && history.push('/login')
+  if (!localStorage.getItem('userId')) {
+    setTimeout(() => {
+      window.flash('You need to be logged in', 'warning')
+    }, 100)
+    history.push('/login')
+  }
   const [passwords, setPasswords] = useState([])
   const [isPending, setIsPending] = useState(false)
 
@@ -25,7 +31,7 @@ const AppDashboard = () => {
       password.encryptedPassword,
       password.userId)
     setPasswords([newPassword, ...passwords])
-    alert('New contact created successfully')
+    window.flash('New contact created successfully', 'success')
   }
 
   useEffect(() => {
@@ -45,7 +51,7 @@ const AppDashboard = () => {
       <NavbarComponent 
         passwords={ passwords} 
         handleCreate={ handleCreate }/>
-
+      <Flash />
       <Passwords 
         isPending={isPending}
         passwords={passwords}

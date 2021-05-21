@@ -14,6 +14,9 @@ import { Flash } from '../components/Flash/flash';
 export default function SignIn() {
   const history = useHistory()
   if (localStorage.getItem('userId')) {
+    setTimeout(() => {
+      window.flash('You are logged in', 'warning')
+    }, 100)
     history.push('/')
   }
   const firstName= useRef('')
