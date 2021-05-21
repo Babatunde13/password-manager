@@ -1,8 +1,7 @@
 import { 
   BrowserRouter as Router, 
   Switch, 
-  Route, 
-  useHistory,
+  Route,
   Redirect
 } from "react-router-dom";
 import EventEmitter from "events";
@@ -14,7 +13,6 @@ import Signup from "./screens/Signup";
 export const event = new EventEmitter()
 
 const App = () => {
-  const history = useHistory()
   window.flash = (message, type="success") => event.emit(
     'flash', 
     ({message, type})

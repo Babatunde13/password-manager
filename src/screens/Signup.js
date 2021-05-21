@@ -29,8 +29,6 @@ export default function SignIn() {
       email: e.target.email.value,
       password: e.target.password.value
     }
-    console.log(body)
-    console.log(body.firstName && body.lastName && body.password && body.email && body.password === e.target.confirm_password.value)
     try {
       if (body.firstName && body.lastName && body.password && body.email && body.password === e.target.confirm_password.value) {
         const user = await createUser(body.firstName, body.lastName, body.email, body.password)
@@ -43,9 +41,9 @@ export default function SignIn() {
           window.flash('Account created sucessfully, signed in', 'success')
         }
       } else if (!body.firstName || !body.email || !body.lastName || !e.target.confirm_password.value) {
-        window.flash('All fields are required', 'error')
+        setValidated(true)
       } else {
-        window.flash('Password and confirm password fields must be equal', 'error')
+        setValidated(true)
       }
     } catch (error) {
       console.log(error)
@@ -94,12 +92,13 @@ export default function SignIn() {
                 name='email'
               />
               <Form.Control.Feedback type="invalid">
-                Please choose a valid email.
+                Please choose a valid and unique email. 
               </Form.Control.Feedback>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} md="6" controlId="validationCustom03">
+            <Form.Group as={Col} md="6" controlId="validationCustom04">
               <Form.Label>Password</Form.Label>
               <Form.Control 
                 type="password" 
