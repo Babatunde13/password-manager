@@ -8,22 +8,26 @@ const client = new faunadb.Client({secret: process.env.REACT_APP_FAUNA_KEY})
 
 export  const createUser = async (firstName, lastName, email, password) => {
   password = await bcrypt.hash(password, bcrypt.genSaltSync(10))
-  let newUser = await client.query(
-    q.Create(
-      q.Collection('users'),
-      {
-        data: {
-          firstName, 
-          email, 
-          lastName, 
-          password
+  try {
+    let newUser = await client.query(
+      q.Create(
+        q.Collection('users'),
+        {
+          data: {
+            firstName, 
+            email, 
+            lastName, 
+            password
+          }
         }
-      }
+      )
     )
-  )
-  if (newUser.name === 'BadRequest') return
-  newUser.data.id = newUser.ref.value.id
-  return newUser.data
+    if (newUser.name === 'BadRequest') return
+    newUser.data.id = newUser.ref.value.id
+    return newUser.data
+  } catch (error) {
+    return
+  }
 }
 
 export const getUser = async (userId) => {

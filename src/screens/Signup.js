@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import NavbarComponent from '../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { Flash } from '../components/Flash/flash';
 
 export default function SignIn() {
   const history = useHistory()
@@ -30,26 +31,33 @@ export default function SignIn() {
       email: email.current.value,
       password: password.current.value
     }
-    if (body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value) {
-      const user = await createUser(body.firstName, body.lastName, body.email, body.password)
-      if (!user) {
-        alert('Email has been chosen')
+    console.log(body)
+    console.log(body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value)
+    try {
+      if (body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value) {
+        const user = await createUser(body.firstName, body.lastName, body.email, body.password)
+        if (!user) {
+          window.flash('Email has been chosen', 'error')
+        } else {
+          localStorage.setItem('userId', user.id)
+          localStorage.setItem('email', user.email)
+          history.push('/')
+          window.flash('Account created sucessfully, signed in', 'success')
+        }
+      } else if (!body.firstName || !body.email || !body.lastName || !confirm_password.current.value) {
+        window.flash('All fields are required', 'error')
       } else {
-        localStorage.setItem('userId', user.id)
-        localStorage.setItem('email', user.email)
-        history.push('/')
-        alert('Account created sucessfully, signing you in...')
+        window.flash('Password and confirm password fields must be equal', 'error')
       }
-    } else if (!body.firstName || !body.email || !body.lastName || !body.password || (body.password !== confirm_password.current.value)) {
-      setValidated(true)
-    } else {
-      alert('Password and confirm password fields must be equal')
+    } catch (error) {
+      console.log(error)
     }
   }
   
   return (
     <>
-      <NavbarComponent /> <br/><br/>
+      <NavbarComponent /> 
+      <Flash /> <br/><br/>
       <Container className='d-flex flex-column align-items-center justify-content-center pt-5' style={{height : '80vh'}}>
         <p className="h3 display-4 mt-5"><FontAwesomeIcon icon={faUserCircle} size="1x" /></p>
         <p className="h2 display-5">Register</p>
