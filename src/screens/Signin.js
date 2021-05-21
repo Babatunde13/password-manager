@@ -9,10 +9,14 @@ import Container from "react-bootstrap/Container";
 import NavbarComponent from '../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { Flash } from '../components/Flash/flash';
 
 export default function SignIn() {
   const history = useHistory()
   if (localStorage.getItem('userId')) {
+    setTimeout(() => {
+      window.flash('You are logged in', 'warning')
+    }, 100)
     history.push('/') 
     }
   const [validated, setValidated] = useState(false);
@@ -35,15 +39,16 @@ export default function SignIn() {
         localStorage.setItem('userId', user.id)
         localStorage.setItem('email', user.email)
         history.push('/')
-        alert('Logged in successfully!')
+        window.flash('Logged in successfully!', 'success')
       } else {
-        alert('Invalid email or password')
+        window.flash('Invalid email or password', 'error')
       }
     }
   }
   return (
     <>
       <NavbarComponent />
+      <Flash />
       <Container className='d-flex flex-column align-items-center justify-content-center' style={{height : '80vh'}}>
         <p className="h3 display-4"><FontAwesomeIcon icon={faUserCircle} size="1x" /></p>
         <p className="h2 display-5">Sign in</p>
