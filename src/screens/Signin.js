@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react'
+import { useState} from 'react'
 import { useHistory } from 'react-router-dom';
 import {loginUser} from '../models'
 import Form from "react-bootstrap/Form";
@@ -19,16 +19,13 @@ export default function SignIn() {
     }, 100)
     history.push('/') 
   }
-  const [validated, setValidated] = useState(false);
-
-  const email = useRef('')
-  const password = useRef('')
+  const [validated, setValidated] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const body = {
-      email: email.current.value,
-      password: password.current.value
+      email: event.target.email.value,
+      password: event.target.password.value
     }
     // Handle login logic
     if (!body.email || !body.password) {
@@ -56,7 +53,7 @@ export default function SignIn() {
           <Form.Row>
             <Form.Group as={Col} md="12" controlId="validationCustom01">
               <Form.Label>Email</Form.Label>
-              <Form.Control required ref={email} type="email" placeholder="Email" />
+              <Form.Control required name='email' type="email" placeholder="Email" />
               <Form.Control.Feedback type="invalid">Please provide a valid email.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
             </Form.Group>
@@ -64,7 +61,7 @@ export default function SignIn() {
           <Form.Row>
             <Form.Group as={Col} md="12" controlId="validationCustom02">
               <Form.Label>Password</Form.Label>
-              <Form.Control required ref={password} type="password" placeholder="Password" />
+              <Form.Control required name='password' type="password" placeholder="Password" />
               <Form.Control.Feedback type="invalid">Please provide a password.</Form.Control.Feedback>
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>

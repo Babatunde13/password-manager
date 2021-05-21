@@ -1,4 +1,4 @@
-import {useRef, useState} from 'react'
+import { useState } from 'react'
 import { createUser } from '../models';
 import {useHistory} from 'react-router-dom'
 import Form from "react-bootstrap/Form";
@@ -19,25 +19,20 @@ export default function SignIn() {
     }, 100)
     history.push('/')
   }
-  const firstName= useRef('')
-  const lastName= useRef('')
-  const email = useRef('')
-  const password = useRef('')
-  const confirm_password = useRef('')
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const body = {
-      firstName: firstName.current.value,
-      lastName: lastName.current.value,
-      email: email.current.value,
-      password: password.current.value
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      email: e.target.email.value,
+      password: e.target.password.value
     }
     console.log(body)
-    console.log(body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value)
+    console.log(body.firstName && body.lastName && body.password && body.email && body.password === e.target.confirm_password.value)
     try {
-      if (body.firstName && body.lastName && body.password && body.email && body.password === confirm_password.current.value) {
+      if (body.firstName && body.lastName && body.password && body.email && body.password === e.target.confirm_password.value) {
         const user = await createUser(body.firstName, body.lastName, body.email, body.password)
         if (!user) {
           window.flash('Email has been chosen', 'error')
@@ -47,13 +42,14 @@ export default function SignIn() {
           history.push('/')
           window.flash('Account created sucessfully, signed in', 'success')
         }
-      } else if (!body.firstName || !body.email || !body.lastName || !confirm_password.current.value) {
+      } else if (!body.firstName || !body.email || !body.lastName || !e.target.confirm_password.value) {
         window.flash('All fields are required', 'error')
       } else {
         window.flash('Password and confirm password fields must be equal', 'error')
       }
     } catch (error) {
       console.log(error)
+      window.flash('Something went wrong', 'error')
     }
   }
   
@@ -70,7 +66,7 @@ export default function SignIn() {
               <Form.Label>First name</Form.Label>
               <Form.Control
                 required
-                ref={firstName}
+                name='firstName'
                 type="text"
                 placeholder="First name"
               />
@@ -81,7 +77,7 @@ export default function SignIn() {
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 required
-                ref={lastName}
+                name='lastName'
                 type="text"
                 placeholder="Last name"
               />
@@ -95,7 +91,7 @@ export default function SignIn() {
                 placeholder="Email"
                 aria-describedby="inputGroupPrepend"
                 required
-                ref={email}
+                name='email'
               />
               <Form.Control.Feedback type="invalid">
                 Please choose a valid email.
@@ -105,7 +101,12 @@ export default function SignIn() {
           <Form.Row>
             <Form.Group as={Col} md="6" controlId="validationCustom03">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" required ref={password} />
+              <Form.Control 
+                type="password" 
+                placeholder="Password" 
+                required 
+                name='password'
+               />
               <Form.Control.Feedback type="invalid">
                 Please provide a password between 8 and 20.
               </Form.Control.Feedback>
@@ -113,20 +114,18 @@ export default function SignIn() {
             </Form.Group>
             <Form.Group as={Col} md="6" controlId="validationCustom04">
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control type="password" placeholder="Confirm Password" required ref={confirm_password} />
+              <Form.Control 
+                type="password" 
+                placeholder="Confirm Password" 
+                required 
+                name='confirm_password'
+               />
               <Form.Control.Feedback type="invalid">
                 Fields do not match.
               </Form.Control.Feedback>
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
-          <Form.Group>
-            <Form.Check
-              required
-              label="Agree to terms and conditions"
-              feedback="You must agree before submitting."
-            />
-          </Form.Group>
           <Button type="submit">Register</Button>
           <p className="text-center"><Link to="/login">Sign in</Link> if already registered!</p>
         </Form>
