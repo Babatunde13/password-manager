@@ -31,6 +31,7 @@ const EditPasswordModal = props  => {
       id: props.id
     }
     props.editPassword(payload)
+    props.closePreview()
   }
 
   return (

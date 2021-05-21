@@ -33,12 +33,13 @@ const Password = ({
   const editPassword = (payload) => {
     handleEdit(payload)
     setEditModal(false)
+    window.flash('Password edited successfully', 'success')
   }
 
 
   const deletePassword = () => {
     handleDelete(id)
-    alert('Password deleted successfully')
+    window.flash('Password deleted successfully', 'success')
   }
 
   return (

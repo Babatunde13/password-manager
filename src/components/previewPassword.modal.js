@@ -71,6 +71,7 @@ const PreviewPasswordModal = props  => {
         </Button>
       </Modal.Footer>
       <EditPasswordModal
+          closePreview={() => {props.onHide()}}
           id={props.id}
           show={props.edit}
           editPassword={props.editPassword}

@@ -41,9 +41,7 @@ const AppDashboard = () => {
       setPasswords(passwordData)
     }
     getContacts()
-    setTimeout(() => {
-      setIsPending(false)
-    }, 1000);
+    setIsPending(false)
   }, [])
 
   return (

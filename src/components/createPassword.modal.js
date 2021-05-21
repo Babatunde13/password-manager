@@ -32,6 +32,7 @@ const CreatePasswordModal = props  => {
     setAccountUrl('')
     setEmail('')
     setPassword('')
+    window.flash('Password created successfully', 'success')
   }
 
   const onHide = () => {
