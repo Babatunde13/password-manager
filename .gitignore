@@ -25,3 +25,6 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+# Lighthouse report
+babatunde-password-manager.netlify.app_2021-05-06_13-59-57.report.html

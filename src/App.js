@@ -4,8 +4,15 @@ import AppDashboard from './screens/App';
 import Home from "./screens/Home";
 import Signin from "./screens/Signin";
 import Signup from "./screens/Signup";
+import  EventEmitter from "events";
+
+export const event = new EventEmitter()
 
 const App = () => {
+  window.flash = (message, type="success") => event.emit(
+    'flash', 
+    ({message, type})
+  );
   return (
     <Router>
       <Switch>
