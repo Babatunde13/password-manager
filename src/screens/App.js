@@ -4,7 +4,6 @@ import {
   createPassword, 
   deletePassword, 
   updatePassword } from "../models";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Passwords from '../components/Passwords';
 import NavbarComponent from '../components/Navbar';
 import { useHistory } from 'react-router';

@@ -5,6 +5,7 @@ import {
   Redirect
 } from "react-router-dom";
 import EventEmitter from "events";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import AppDashboard from './screens/App';
 import Home from "./screens/Home";
 import Signin from "./screens/Signin";
